@@ -6,6 +6,7 @@
         protected int $price; 
         protected string $beverageName;
         protected string $beverageSize;
+        protected string $beverageType;
 
         public function setPrice (int $price) {
             $this->price = $price;
@@ -15,11 +16,11 @@
             return $this->price;
         }
 
-        public function setBeverageName (string $beverageName) {
+        public function setConsumableName (string $beverageName) {
             $this->beverageName = $beverageName;
         }
 
-        public function getBeverageName () : string {
+        public function getConsumableName () : string {
             return $this->beverageName;
         }
 
@@ -29,6 +30,14 @@
 
         public function getBeverageSize () : string {
             return $this->beverageSize;
+        }
+
+        public function setBeverageType (string $beverageType) {
+            $this->beverageType = $beverageType;
+        }
+
+        public function getBeverageType () : string {
+            return $this->beverageType;
         }
 
     }
