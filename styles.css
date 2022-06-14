@@ -1,3 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
+  /* supported by Chrome and Opera */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+}
+/* The typing effect */
+
 html,
 #page {
   padding: 0;
@@ -11,14 +27,14 @@ body {
   color: #959595;
   font: normal 12px/2em Sans-Serif;
 }
-/* h1,
+h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  color: black;
-} */
+  color: White;
+}
 
 .default-layout-body {
   display: grid;
@@ -41,7 +57,7 @@ h6 {
   grid-template-rows: 0 auto 0px;
   align-items: space-between;
   background-image: url(assets/bg/background.jpg);
-  background-size:contain;
+  background-size: contain;
 }
 .default-layout-body .footer {
   margin-bottom: 1%;
@@ -58,11 +74,18 @@ h6 {
   color: white;
   background-color: rgb(120, 59, 2);
 }
-.content .content-body{
+.content .content-body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  overflow: none;
+  padding: 20px;
   display: grid;
-  grid-template-rows: 0 auto 0px;
+  place-items: center;
+  transition-duration: 0.6s;
+  justify-items: center;
   justify-content: center;
-  align-content: center;
+  height: 100%;
 }
 .footer .footer-body {
   color: black;
@@ -74,7 +97,23 @@ h6 {
 }
 
 /*... inner layers */
-.content-body .welcome{
- color: white;
- text-align: center;
+.content-body .welcome {
+  color: white;
+  text-align: center;
+}
+
+/*...  label design */
+.dialogue-box {
+  justify-items: center;
+  justify-content: space-evenly;
+
+  max-height: 100%;
+  width: 100%;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  background-color: rgba(0, 128, 0, 0.705);
+  border: 1px solid black;
+  border-radius: 10px;
 }
