@@ -3,41 +3,27 @@
     declare(strict_types = 1);
 
     class Beverage implements IConsumable {
-        protected int $price; 
+        protected float $price; 
         protected string $beverageName;
-        protected string $beverageSize;
-        protected string $beverageType;
+        protected string $consType;  
 
-        public function setPrice (int $price) {
+        public function __construct(string $beverageName, string $consType, float $price)
+        {
+            $this->beverageName = $beverageName;
+            $this->consType = $consType;
             $this->price = $price;
         }
 
-        public function getPrice () : int {
+        public function getPrice () : float {
             return $this->price;
-        }
-
-        public function setConsumableName (string $beverageName) {
-            $this->beverageName = $beverageName;
         }
 
         public function getConsumableName () : string {
             return $this->beverageName;
         }
 
-        public function setBeverageSize (string $beverageSize) {
-            $this->beverageSize = $beverageSize;
-        }
-
-        public function getBeverageSize () : string {
-            return $this->beverageSize;
-        }
-
-        public function setBeverageType (string $beverageType) {
-            $this->beverageType = $beverageType;
-        }
-
-        public function getBeverageType () : string {
-            return $this->beverageType;
+        public function getConsType () : string {
+            return $this->consType;
         }
 
     }
