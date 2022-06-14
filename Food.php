@@ -3,32 +3,27 @@
     declare(strict_types = 1);
 
     class Food implements IConsumable {
-        protected int $price;
+        protected float $price;
         protected string $foodName;
-        protected string $foodType;
+        protected string $consType;
 
-        public function setPrice (int $price) {
+        public function __construct(string $foodName, string $consType, float $price)
+        {
+            $this->foodName = $foodName;
+            $this->consType = $consType;
             $this->price = $price;
         }
 
-        public function getPrice () : int {
+        public function getPrice () : float {
             return $this->price;
-        }
-
-        public function setConsumableName (string $foodName) {
-            $this->foodName = $foodName;
         }
 
         public function getConsumableName () : string {
             return $this->foodName;
         }
 
-        public function setFoodType (string $foodType) {
-            $this->foodType = $foodType;
-        }
-
-        public function getFoodType () : string {
-            return $this->foodType;
+        public function getConsType () : string {
+            return $this->consType;
         }
         
     }

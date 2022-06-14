@@ -1,9 +1,7 @@
 <?php
 
-    interface IConsumable {
-        public function setPrice(int $price);
-        public function getPrice() : int;      
-        public function setConsumableName(string $consName);
+    interface IConsumable {       
+        public function getPrice() : float;      
         public function getConsumableName() : string;  
     }
 

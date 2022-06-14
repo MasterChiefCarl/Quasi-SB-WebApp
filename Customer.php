@@ -1,32 +1,24 @@
-<?php 
-    
+<?php    
     declare(strict_types = 1);
+
+    require_once 'init.php';
+    use Sessions\Session;
     
     class Customer implements ICustomer {
         private string $custName;
-        private array $orders;
-        private int $ordQty;
 
-        public function setCustName (string $custName) {
-            $this->custName = $custName;
+        public function __construct ($custName) {
+            if(!Session::has('custName') or Session::has('custName')) {
+                $_SESSION['custName'] = $custName;
+            }
         }
 
         public function getCustName () : string {
-            return $this->custName;
-        }
-
-        public function setOrders(array $orders) {
-            array_push($this->orders, $orders);
-        }
-        public function getOrders() : array {
-            return $this->orders;
-        }
-
-        public function setOrdQty(int $ordQty) {
-            $this->ordQty = $ordQty;
-        }
-
-        public function getOrdQty() : int {
-            return $this->ordQty;
+            if(Session::has('custName')) {
+                $this->custName = Session::get('custName');
+                return $this->custName;
+            }
+            else
+                return false;
         }
     }
