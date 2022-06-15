@@ -1,6 +1,6 @@
 <?php
-require_once 'IDBFuncs.php';
-require_once 'DBLibrary.php';
+require_once 'php/IDBFuncs.php';
+require_once 'php/DBLibrary.php';
 
 try {
     $dbSource = new PDO('mysql:host=localhost;dbname=sb','root','');

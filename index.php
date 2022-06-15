@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once 'init.php';
-require_once 'Session.php';
+require_once 'php/init.php';
+require_once 'php/Session.php';
 
 use Sessions\Session;
 
@@ -30,10 +30,14 @@ if ($_REQUEST && $_REQUEST["custName"] != null) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>QSASI-STARBUCKS POS</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="animations.css" />
+
+  <!-- Stylesheets, Logo ref -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
+  
 </head>
 
 <body>
