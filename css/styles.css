@@ -5,6 +5,25 @@
 }
 
 /*global configs*/
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 * {
   margin: 0;
   padding: 0;
@@ -202,8 +221,24 @@ input.text:focus {
   border: none;
 }
 select{
-  width: 100%;
+  color:white;
+  font-family: "Century Gothic";
+  height: 45px;
+  margin:15px;
+  max-width: 45%;
+  background-color:transparent;
+  border: none;
+  border-bottom: 3px black solid;
+  transition-duration:0.5;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
 }
+select option{
+  color:white;
+  background-color:black;
+  border: none;
+}
+
 button.button {
   color: black;
   margin: 10px;

@@ -20,14 +20,14 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php echo $_SESSION['custName'];?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $_SESSION['custName']; ?>:QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
   <script src="js/axios.js" type="text/javascript"></script>
-  <script src="js/select.js" type="text/javascript"></script>
+
 
 </head>
 
@@ -45,9 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <h2>Select Your Menu Options:</h2>
             <select name="consumables" id="consumables">
               <option value="starter" selected>-- Select Type of Consumable --</option>
-            </select>
-            <br>
-            <select name="subconsumables" id="subconsumables" disabled>
+            </select><select name="subconsumables" id="subconsumables" disabled>
               <option value="starter" selected>-- Select --</option>
             </select>
           </center>
@@ -105,7 +103,7 @@ if (session_status() === PHP_SESSION_NONE) {
     var id = document.getElementById("consumables").value;
 
     document.getElementById("subconsumables").disabled = id > 0 ? false : true;
-    document.getElementById("result-field").innerHTML = id > 0 ? nocoffee : true;
+    document.getElementById("result-field").innerHTML = id > 0 ? nocoffee : nocoffee;
 
     axios
       .get("dbquery.php", {
@@ -122,8 +120,8 @@ if (session_status() === PHP_SESSION_NONE) {
   function showSubConsumables(response) {
     var result = response;
     layout = `
-      <option value="starter" selected>-- Select --</option>
-      `;
+    <option value="starter" selected>-- Select --</option>
+    `;
     for (i in result.data) {
       layout +=
         "<option value=" +
@@ -139,7 +137,7 @@ if (session_status() === PHP_SESSION_NONE) {
   function getProducts() {
     var id = document.getElementById("subconsumables").value;
 
-    document.getElementById("result-field").innerHTML = id != 'starter' ? nocoffee : true;
+    document.getElementById("result-field").innerHTML = id != 'starter' ? nocoffee : nocoffee;
 
     if (id != "starter") {
       axios
@@ -166,9 +164,9 @@ if (session_status() === PHP_SESSION_NONE) {
       rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
         result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
 
-      rawdata += '<div class="button" align="center">Add to order</div></label></div></center></div>';
+      rawdata += '<button class="button" align="center">Add to order</button></center></div>';
     }
-    rawdata += '</div>';
+    rawdata += '</form></div>';
 
     document.getElementById("result-field").innerHTML = rawdata;
   }
