@@ -1,8 +1,8 @@
 <?php
 
 declare(strict_types=1);
-require_once 'init.php';
-require_once 'Session.php';
+require_once 'php/init.php';
+require_once 'php/Session.php';
 
 use Sessions\Session;
 
@@ -19,12 +19,15 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>QSASI-STARBUCKS POS</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="animations.css" />
+
+  <title>Welcome To Starbucks <?php echo $_SESSION['custName'];?>:QSASI-STARBUCKS POS</title>
+
+  <!-- Stylesheets, Logo ref and, jsScripts -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
-  <script src="axios.js" type="text/javascript"></script>
-  <script type="text/javascript" src="js/pw.js"></script>
+  <script src="js/axios.js" type="text/javascript"></script>
+  <script src="js/select.js" type="text/javascript"></script>
 
 </head>
 
@@ -160,8 +163,8 @@ if (session_status() === PHP_SESSION_NONE) {
     rawdata = '<div class="scrollmenu"><form action="select.php" method="post">';
 
     for (i in result.data) {
-      rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>'+
-      result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/'+result.data[i].imagePath+'"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
+      rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
+        result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
 
       rawdata += '<div class="button" align="center">Add to order</div></label></div></center></div>';
     }
