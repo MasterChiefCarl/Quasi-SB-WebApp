@@ -11,9 +11,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QSASI-STARBUCKS POS</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
   <script src="axios.js" type="text/javascript"></script>
 </head>
@@ -39,7 +37,14 @@ if (session_status() === PHP_SESSION_NONE) {
       <div class="content-body">
         <div class="dialogue-box" id="fadeInDowwn">
           <center>
-            <h2>Select Your Current Option</h2>
+            <h2>Select Your Menu Options:</h2>
+            <select name="colleges" id="colleges">
+              <option value="starter" selected>-- Select Type of Consumable --</option>
+            </select>
+            <br>
+            <select name="programs" id="programs" disabled>
+              <option value="starter" selected>-- Select Type of Product--</option>
+            </select>
           </center>
         </div>
         <!-- <div class="dialogue-box" id="fadeInDowwn">
@@ -56,68 +61,6 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
   </div>
 </body>
-<script>
-  //value layout is different due to the fact that this is JAVASCRIPT and not PHP
-  window.addEventListener("load", getColleges);
-  document.getElementById("colleges").addEventListener("change", getPrograms);
 
-  function getProducts() {
-    axios
-      .get("dbquery.php", {
-        params: {
-          colleges: true,
-        },
-      })
-      .then((response) => showColleges(response))
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function showProducts(response) {
-    var result = response;
-    for (i in result.data) {
-      var option = document.createElement("option");
-      option.value = result.data[i].coll_id;
-      option.text = result.data[i].coll_fname;
-      var select = document.getElementById("colleges");
-      select.appendChild(option);
-    }
-  }
-
-  function getSubProduct() {
-    var id = document.getElementById("colleges").value;
-
-    document.getElementById("programs").disabled = id > 0 ? false : true;
-
-    axios
-      .get("dbQuery.php", {
-        params: {
-          programs: id,
-        },
-      })
-      .then((response) => showPrograms(response))
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function showPrograms(response) {
-    var result = response;
-    layout = `
-      <option value="starter" selected>-- Select a program --</option>
-      `;
-    for (i in result.data) {
-      layout +=
-        "<option value=" +
-        result.data[i].prog_id +
-        ">" +
-        result.data[i].prog_fname +
-        "</option>";
-    }
-
-    document.getElementById("programs").innerHTML = layout;
-  }
-</script>
 
 </html>
