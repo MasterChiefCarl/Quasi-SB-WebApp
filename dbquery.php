@@ -7,12 +7,14 @@ use Sessions\Session;
 Session::start();
 
 try {
-    $dbSource = new PDO('mysql:host=localhost;dbname=usjr','root','');
+    $dbSourceP = new PDO('mysql:host=localhost;dbname=products','root','');
+    $dbSourceO = new PDO('mysql:host=localhost;dbname=orders', 'root','');
 } catch(PDOException $e) {
     echo $e->getMessage();
 }
 
-$db = new DBLibrary($dbSource);
+$dbProducts = new DBLibrary($dbSourceP);
+$dbOrders = new DBLibrary($dbSourceO);
 
 
 ?>
