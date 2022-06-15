@@ -3,40 +3,8 @@
   src: url("assets/fonts/Freight\ Sans\ Black.otf");
   font-weight: 700;
 }
-input.text {
-  width: 75%;
-  text-align: center;
-  font-family: "Century Gothic";
-  background-color: transparent;
-  padding: 15px;
-  margin: 5px 0;
-  border: none;
-  border-bottom: 2px solid black;
-  color: white;
-}
-input.text:focus {
-  text-align: center;
-  border: none;
-}
 
-button.button {
-  color: black;
-  margin: 10px;
-  padding: 10px 0;
-  width: 50%;
-  background-color: white;
-  border: none;
-  border-radius: 25px;
-  transition-duration: 0.5s;
-}
-button.button:hover {
-  color: white;
-  margin: 10px;
-  background-color: black;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-}
+/*global configs*/
 * {
   margin: 0;
   padding: 0;
@@ -45,7 +13,6 @@ button.button:hover {
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 }
-/* The typing effect */
 
 html,
 #page {
@@ -58,8 +25,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
-  color: #959595;
-  font: normal 12px/2em Sans-Serif;
+  font: normal 12px/2em "Century Gothic";
 }
 img {
   height: 200px;
@@ -117,6 +83,7 @@ h5{
   font-size: 1.0em;
 }
 
+/*body-layout configuration*/
 .default-layout-body {
   display: grid;
   height: 100vh;
@@ -180,13 +147,13 @@ h5{
   text-align: center;
 }
 
-/*...  label design */
+/*...  box-design */
 .dialogue-box {
   justify-items: center;
   justify-content: space-evenly;
 
   max-height: 100%;
-  width: 100%;
+  width: 40vw;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
@@ -194,4 +161,56 @@ h5{
   background-color: rgb(6, 77, 6);
   border: 1px solid black;
   border-radius: 10px;
+}
+.dialogue-box-plus {
+  justify-items: center;
+  justify-content: space-evenly;
+
+  max-height: 100%;
+  width: 50vw;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+  background-color: rgb(6, 77, 6);
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+/*Input configuations*/
+input.text {
+  width: 75%;
+  text-align: center;
+  font-family: "Century Gothic";
+  background-color: transparent;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-bottom: 2px solid black;
+  color: white;
+}
+input.text:focus {
+  text-align: center;
+  border: none;
+}
+select{
+  width: 100%;
+}
+button.button {
+  color: black;
+  margin: 10px;
+  padding: 10px 0;
+  width: 50%;
+  background-color: white;
+  border: none;
+  border-radius: 25px;
+  transition-duration: 0.5s;
+}
+button.button:hover {
+  color: white;
+  margin: 10px;
+  background-color: black;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }

@@ -1,21 +1,31 @@
 <?php
 require_once 'IDBFuncs.php';
 require_once 'DBLibrary.php';
-require_once 'init.php';
-
-use Sessions\Session;
-Session::start();
 
 try {
-    $dbSourceP = new PDO('mysql:host=localhost;dbname=products','root','');
-    $dbSourceO = new PDO('mysql:host=localhost;dbname=orders', 'root','');
+    $dbSource = new PDO('mysql:host=localhost;dbname=sb','root','');
 } catch(PDOException $e) {
     echo $e->getMessage();
 }
 
-$dbProducts = new DBLibrary($dbSourceP);
-$dbOrders = new DBLibrary($dbSourceO);
+$db = new DBLibrary($dbSource);
 
+if(isset($_GET['consumables'])) {
+    $result = $db->select()->from('consumables')->getAll();
+    $jsonResult = json_encode($result);
+    echo $jsonResult;
+}
 
-?>
+else if(isset($_GET['subconsumables'])) {
+    $id = $_GET['subconsumables'];
+    $result = $db->select()->from('subconsumables')->where('consID', $id)->getAll();
+    $jsonResult = json_encode($result);
+    echo $jsonResult;
+}
 
+else if(isset($_GET['products'])) {
+    $id = $_GET['products'];
+    $result = $db->select()->from('products')->where('subconsID', $id)->getAll();
+    $jsonResult = json_encode($result);
+    echo $jsonResult;
+}
