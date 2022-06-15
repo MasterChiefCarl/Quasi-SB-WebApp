@@ -1,16 +1,49 @@
+@font-face {
+  font-family: "starbucks";
+  src: url("assets/fonts/Freight\ Sans\ Black.otf");
+  font-weight: 700;
+}
+input.text {
+  width: 75%;
+  text-align: center;
+  font-family: "Century Gothic";
+  background-color: transparent;
+  padding: 15px;
+  margin: 5px 0;
+  border: none;
+  border-bottom: 2px solid black;
+  color: white;
+}
+input.text:focus {
+  text-align: center;
+  border: none;
+}
+
+button.button {
+  color: black;
+  margin: 10px;
+  padding: 10px 0;
+  width: 50%;
+  background-color: white;
+  border: none;
+  border-radius: 25px;
+  transition-duration: 0.5s;
+}
+button.button:hover {
+  color: white;
+  margin: 10px;
+  background-color: black;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
-  /* supported by Chrome and Opera */
-  -webkit-user-select: none;
-  /* Safari */
-  -khtml-user-select: none;
-  /* Konqueror HTML */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 }
 /* The typing effect */
 
@@ -19,6 +52,7 @@ html,
   padding: 0;
   margin: 0;
 }
+
 body {
   margin: 0;
   padding: 0;
@@ -27,6 +61,15 @@ body {
   color: #959595;
   font: normal 12px/2em Sans-Serif;
 }
+img {
+  height: 200px;
+  width: 200px;
+  margin: 25px auto;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+/* Header configuration */
 h1,
 h2,
 h3,
@@ -34,6 +77,44 @@ h4,
 h5,
 h6 {
   color: White;
+  margin: 0;
+  padding: 0;
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+}
+
+h1,
+h2,
+h3 {
+  font-family: "starbucks";
+}
+h4,
+h5,
+h6 {
+  font-family: "Century Gothic";
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: 2px;
+  margin-bottom: 50px;
+}
+h2 {
+  letter-spacing: 1.25px;
+  font-size: 1.75em;
+  margin-bottom: 15px;
+}
+h3 {
+  letter-spacing: 1.55px;
+  font-size: 1.2em;
+}
+h4{
+  letter-spacing: 1.55px;
+  font-size: 1.1em;
+}
+h5{
+  letter-spacing: 1.55px;
+  font-size: 1.0em;
 }
 
 .default-layout-body {
@@ -60,14 +141,12 @@ h6 {
   background-size: contain;
 }
 .default-layout-body .footer {
-  margin-bottom: 1%;
   position: sticky;
 }
 
 /* layout of contents of the part's bodies*/
 .nav .nav-body {
-  min-height: 45px;
-  padding: 0 16px 0 16px;
+  height: 100%;
   display: grid;
   justify-content: center;
   align-content: center;
@@ -75,25 +154,24 @@ h6 {
   background-color: rgb(120, 59, 2);
 }
 .content .content-body {
-  background-repeat: no-repeat;
-  background-size: cover;
   background-attachment: fixed;
   overflow: none;
   padding: 20px;
   display: grid;
   place-items: center;
-  transition-duration: 0.6s;
   justify-items: center;
   justify-content: center;
   height: 100%;
 }
 .footer .footer-body {
   color: black;
-  min-height: 40px;
+  height: 100%;
   display: grid;
-  justify-content: center;
   align-content: center;
   background-color: darkgreen;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
 }
 
 /*... inner layers */
@@ -113,7 +191,7 @@ h6 {
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  background-color: rgba(0, 128, 0, 0.705);
+  background-color: rgb(6, 77, 6);
   border: 1px solid black;
   border-radius: 10px;
 }

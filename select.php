@@ -32,13 +32,21 @@ if (session_status() === PHP_SESSION_NONE) {
   <div class="default-layout-body">
     <div class="nav">
       <div class="nav-body">
-        <h1>Welcome To Starbucks <?php echo $_SESSION['custName'];?></h1>
+        <h3>Welcome To Starbucks <?php echo $_SESSION['custName']; ?></h3>
       </div>
     </div>
     <div class="content">
       <div class="content-body">
-        <h1>Select Your Current Option</h1>
-        <br>This is where you will place your buttons<br>Food Botton<br>Beverages Button
+        <div class="dialogue-box" id="fadeInDowwn">
+          <center>
+            <h2>Select Your Current Option</h2>
+          </center>
+        </div>
+        <!-- <div class="dialogue-box" id="fadeInDowwn">
+          <center>
+            <h2>Results</h2>
+          </center>
+        </div> -->
       </div>
     </div>
     <div class="footer">

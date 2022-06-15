@@ -32,6 +32,8 @@ if ($_REQUEST && $_REQUEST["custName"] != null) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>QSASI-STARBUCKS POS</title>
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
+
   <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
@@ -40,25 +42,27 @@ if ($_REQUEST && $_REQUEST["custName"] != null) {
 <body>
   <div class="default-layout-body">
     <div class="nav">
-      <div class="nav-body">navbar</div>
+      <div class="nav-body"><h3>Welcome To Starbucks</h3></div>
     </div>
     <div class="content">
       <div class="content-body">
-        <div class="dialogue-box">
-          
-            <form action="index.php" method="Post">
+        <div class="dialogue-box" id="fadeInDowwn">
+
+          <form action="index.php" method="Post">
             <center>
-              <h1> Welcome to STARBUCKS </h1>
-              <h3> Please Add Your Name to Get Started</h3>
-              
-              <br><br>
-              <h4><label for="custName">Please Input Your Name:</h4>
-              <input type="text" name="custName" id="custName" /></label>
+              <img src="assets/logo/starbucks.png" id="fadeInDown">
+
+              <h2>Welcome to</h2>
+              <h1> STARBUCKS COFFEE</h1>
+              <!-- <img src="assets/logo/starbucks.png" > -->
+              <h4> Please Add Your Name to Get Started</h4>
+              <h5><label for="custName">Please Input Your Name:</h5></label>
+              <input class="text" type="text" name="custName" id="custName" /><br>
               <button type="submit" class="button"> Start Selecting </button>
               <br>
-              </center>
-            </form>
-          
+            </center>
+          </form>
+
         </div>
       </div>
     </div>
