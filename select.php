@@ -67,7 +67,9 @@ if (session_status() === PHP_SESSION_NONE) {
 </body>
 <script>
   //value layout is different due to the fact that this is JAVASCRIPT and not PHP
-  document.getElementById("result-field").innerHTML = 'No Results Found :(';
+  var nocoffee = '<h3>No Results Found</h3><br><img src="assets/logo/nocoffee.png" class="smol">';
+
+  document.getElementById("result-field").innerHTML = this.nocoffee;
   window.addEventListener("load", getConsumables);
   document.getElementById("consumables").addEventListener("change", getSubConsumables);
   document.getElementById("subconsumables").addEventListener("change", getProducts);
@@ -100,6 +102,7 @@ if (session_status() === PHP_SESSION_NONE) {
     var id = document.getElementById("consumables").value;
 
     document.getElementById("subconsumables").disabled = id > 0 ? false : true;
+    document.getElementById("result-field").innerHTML = id > 0 ? nocoffee : true;
 
     axios
       .get("dbquery.php", {
@@ -133,7 +136,7 @@ if (session_status() === PHP_SESSION_NONE) {
   function getProducts() {
     var id = document.getElementById("subconsumables").value;
 
-    document.getElementById("result-field").innerHTML = id !='starter' ? 'No Results Found :(' : true;
+    document.getElementById("result-field").innerHTML = id != 'starter' ? nocoffee : true;
 
     if (id != "starter") {
       axios
@@ -146,20 +149,25 @@ if (session_status() === PHP_SESSION_NONE) {
         .catch((error) => {
           console.error(error);
         });
-    }else{
-      document.getElementById("result-field").innerHTML ='No Results Found :(';
+    } else {
+      document.getElementById("result-field").innerHTML = nocoffee;
     }
 
   }
 
   function showProducts(response) {
     var result = response;
-    rawdata = 'rawdata starts here<br>';
-    for (i in result.data) {
-      rawdata += result.data[i].prodID + ' ' + result.data[i].prodName + ' ' + result.data[i].prodPrice + ' ' + result.data[i].imagePath + '<br>';
-    }
-    document.getElementById("result-field").innerHTML = rawdata;
+    rawdata = '<div class="scrollmenu"><form action="select.php" method="post">';
 
+    for (i in result.data) {
+      rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>'+
+      result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/'+result.data[i].imagePath+'"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
+
+      rawdata += '<div class="button" align="center">Add to order</div></label></div></center></div>';
+    }
+    rawdata += '</div>';
+
+    document.getElementById("result-field").innerHTML = rawdata;
   }
 </script>
 

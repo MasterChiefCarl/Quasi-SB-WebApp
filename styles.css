@@ -34,6 +34,13 @@ img {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
+img.smol{
+  height: 100px;
+  width: 100px;
+}
+img.prod{
+  border-radius: 25px;
+}
 
 /* Header configuration */
 h1,
@@ -47,6 +54,7 @@ h6 {
   padding: 0;
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+  word-wrap: break-word;
 }
 
 h1,
@@ -167,7 +175,7 @@ h5{
   justify-content: space-evenly;
 
   max-height: 100%;
-  width: 50vw;
+  width: 75vw;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
@@ -213,4 +221,33 @@ button.button:hover {
   border: none;
   border-radius: 25px;
   cursor: pointer;
+}
+
+/*horizontal-scroll*/
+.scrollmenu {
+  max-height: 100%;
+  max-width: 100%;
+  margin: 5px;
+  padding: 4px;
+  overflow-x: auto;
+  white-space: nowrap;
+  transition-duration: 1s;
+}
+.scrollmenu .scroll {
+  display: inline-block;
+  min-width: 350px;
+  max-width: 100%;
+  max-height: 100%;
+}
+.product {
+  border: 1px solid black;
+  border-radius: 20px;
+  margin: 10px;
+  padding: 10px;
+  min-width: 300px;
+  max-width: 350px;
+  background-color: #ffffffad;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
