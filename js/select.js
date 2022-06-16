@@ -90,9 +90,14 @@ function showProducts(response) {
     var result = response;
     var rawdata = document.createElement('div');
     rawdata.className = "scrollmenu";
+
     // rawdata = '<div class="scrollmenu">';
     // <form action="select.php" method="post">'
+    var formContainer = document.createElement('form');
+    formContainer.method = "post";
+    formContainer.action = "select.php";
 
+    // rawdata.appendChild(formContainer);
     for (i in result.data) {
         // rawdata += '<div class="scroll"><center><div class="product" id="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
         //     result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
@@ -151,6 +156,7 @@ function showProducts(response) {
         })(result.data[i], qtyField);
 
         addBtn.className = "button";
+        addBtn.name = "add";
         addBtn.id = "addBtn";
         addBtn.innerHTML = "Add to cart";
 
@@ -161,14 +167,30 @@ function showProducts(response) {
 
 function getProdData(data, ordQty) {
 
-    axios.post('select.php', JSON.stringify({
-        items: data,
-        ordQty: ordQty
-    })).then(response => {
-    }).catch(error => {
-        console.error(error);
-    })
+    axios.post('api.php',
+        {
+            items: data,
+            ordQty: ordQty
+        })
+        .then((response) => {
+            const { data } = response;
+            console.log(response.data);
+        })
+        .catch(error => {
+            console.error(error);
+        })
 
     console.log(data.prodName + "\n" + ordQty);
 }
 
+// function showData(response) {
+//     var res = response;
+
+//     for (i in res) {
+//         var p = document.createElement('p');
+//         p.innerHTML = res.data[i].ordQty;
+//         document.getElementById('cart').appendChild(p);
+//     }
+
+
+// }

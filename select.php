@@ -7,17 +7,11 @@ require_once 'php/Session.php';
 use Sessions\Session;
 
 $customer = new Customer();
+$cart = new Cart();
 
 if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
-
-$data = json_decode(file_get_contents("php://input"), true);
-
-if(isset($data['items'])) {
-  var_dump($data['items']['prodName']);
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -66,12 +60,35 @@ if(isset($data['items'])) {
         </div>
       </div>
     </div>
+    <div id="cart">
+
+    </div>
     <div class="footer">
       <div class="footer-body">
         <h3>Made with 💖 by Group 1 Jungco, Lapiz, Garces</h3>
       </div>
     </div>
   </div>
+  <table width="500">
+  <tr>
+            <td>Item #</td>
+            <td>Item Name</td>
+            <td>Price</td>
+         </tr>
+         <?php
+    if(Session::has('cart')) {
+      $cartItems = $cart->getCart();
+
+      foreach ($cartItems as $cartCol) {
+        echo '<tr>';
+          echo '<td>' . $cartCol['consName'] . '</td>';
+          echo '<td>' . $cartCol['consType'] . '</td>';
+          echo '<td style="text-align: right;">' . $cartCol['consPrice'] . '.00</td>';
+          echo '</tr>';
+      }
+    }
+  ?>
+  </table>
 </body>
 <script src="js/select.js" type="text/javascript">
   //value layout is different due to the fact that this is JAVASCRIPT and not PHP

@@ -1,33 +1,45 @@
 <?php
     declare(strict_types = 1);
+    require_once 'php/Session.php';
 
-    require_once 'init.php';
     use Sessions\Session;
-
+    Session::start();
     class Cart implements iCart {
         private array $orderList;
         private $totalAmount = 0;
 
         public function addToCart($orders)
-        {
-            $orderedItem = [];
+        {           
 
             if ($orders['consID'] == '1') {
-                $orderedItem = new Food($orders['prodName'], $orders['prodType'], $orders['prodPrice']);
+                $orderedItem = new Beverage($orders['prodName'], $orders['subconsID'], (float)$orders['prodPrice']);
             }
             else if ($orders['consID'] == '2') {
-                $orderedItem = new Beverage($orders['prodName'], $orders['prodType'], $orders['prodPrice']);
+                $orderedItem = new Food($orders['prodName'], $orders['subconsID'], (float)$orders['prodPrice']);
             }
 
-            if(!Session::has('cart')) {
-                $_SESSION['cart'][0]['consName'] = $orderedItem->getConsumableName();
-                $_SESSION['cart'][0]['consType'] = $orderedItem->getConsType();
-                $_SESSION['cart'][0]['consPrice'] = $orderedItem->getPrice();
+            if(Session::has('cart')) {;
+                $tmpValue = $this->getCart();
+                $itemData = array('consName' => $orderedItem->getConsumableName(),
+                'consType' => $orderedItem->getConsType(),
+                'consPrice' => $orderedItem->getPrice()
+                );
+                array_push($tmpValue, $itemData);
+                Session::add('cart', $tmpValue);
+                // array_push($_SESSION['cart']['consName'], $orderedItem->getConsumableName());
+                // array_push($_SESSION['cart']['consType'], $orderedItem->getConsType());
+                // array_push($_SESSION['cart']['consPrice'], $orderedItem->getPrice());
             }
             else {
-                array_push($_SESSION['cart']['consName'], $orderedItem->getConsumableName());
-                array_push($_SESSION['cart']['consType'], $orderedItem->getConsType());
-                array_push($_SESSION['cart']['consPrice'], $orderedItem->getPrice());
+                $orderedItems[0] = array('consName' => $orderedItem->getConsumableName(),
+                'consType' => $orderedItem->getConsType(),
+                'consPrice' => $orderedItem->getPrice()
+                );
+
+                // $_SESSION['cart']['consName'] = $orderedItem->getConsumableName();
+                // $_SESSION['cart']['consType'] = $orderedItem->getConsType();
+                // $_SESSION['cart']['consPrice'] = $orderedItem->getPrice();
+                Session::add('cart', $orderedItems);             
             }
         }
 
@@ -38,8 +50,7 @@
 
         public function getCart() : array
         {
-            $this->orderList = Session::get('cart');
-            return $this->orderList;
+            return Session::get('cart');
         }
 
         public function placeOrder()
