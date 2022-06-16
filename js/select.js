@@ -131,7 +131,7 @@ function showProducts(response) {
 
         prodContainer.appendChild(imgContainer);
 
-        var paragraph2 = document.createElement('h5');
+        var paragraph2 = document.createElement('h2');
         paragraph2.innerHTML = "₱ " + result.data[i].prodPrice + ".00";
 
         prodContainer.appendChild(paragraph2);
@@ -141,6 +141,7 @@ function showProducts(response) {
         var linebreak = document.createElement("br");
 
         qtyField.value = 1;
+        qtyField.min= '1';
         qtyField.type = 'number';
         qtyField.id = 'qtyField';
         qtyField.innerHTML = qtyField.value;

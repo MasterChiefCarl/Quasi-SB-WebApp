@@ -36,12 +36,13 @@ if (session_status() === PHP_SESSION_NONE) {
   <div class="default-layout-body">
     <div class="nav">
       <div class="nav-body">
+        
         <h3>Welcome To Starbucks <?php echo $_SESSION['custName']; ?></h3>
       </div>
     </div>
     <div class="content">
       <div class="content-body">
-        <div class="dialogue-box" id="fadeInDowwn">
+        <div class="dialogue-box-alt" id="fadeInDowwn">
           <center>
             <h2>Select Your Menu Options:</h2>
             <select name="consumables" id="consumables">

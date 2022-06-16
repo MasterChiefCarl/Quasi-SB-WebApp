@@ -54,13 +54,13 @@ img {
   filter: drop-shadow(5px 5px 5px #222);
 }
 img.smol {
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
 }
 img.prod {
-  width:300px;
-  height: 300px;
-  border-radius: 50px;
+  width:175px;
+  height: 175px;
+  border-radius: 40px;
   -webkit-filter: drop-shadow(5px 5px 5px rgb(0, 0, 0));
   filter: drop-shadow(5px 5px 5px rgb(0, 0, 0));
 }
@@ -98,7 +98,7 @@ h1 {
 }
 h2 {
   letter-spacing: 1.25px;
-  font-size: 3.5em;
+  font-size: 2em;
   margin-bottom: 15px;
 }
 h3 {
@@ -107,9 +107,9 @@ h3 {
 }
 h4 {
   letter-spacing: 1.55px;
-  font-size: 1.1em;
+  font-size: 0.75em;
   height:100%;
-  max-width:350px;
+  max-width:250px;
 }
 h5 {
   letter-spacing: 1.55px;
@@ -127,6 +127,7 @@ p{
   height: 100vh;
   width: 100vw;
   grid-template-rows: auto, auto;
+  justify-content: space-between;
   overflow: clip;
 }
 
@@ -137,6 +138,7 @@ p{
 .default-layout-body .content {
   height: 100%;
   min-height: calc(100vh - 102px);
+  min-width: 100vw;
   overflow-y: auto;
   display: grid;
   grid-auto-flow: row;
@@ -200,17 +202,27 @@ p{
   border: 1px solid black;
   border-radius: 10px;
 }
+.dialogue-box-alt {
+  justify-items: center;
+  justify-content: space-evenly;
+  max-height: 100%;
+  width: 35vw;
+  padding:25px;
+  background-color: rgba(6, 77, 6, 0.7);
+  border: 1px solid black;
+  border-radius: 10px;
+}
 .dialogue-box-plus {
   justify-items: center;
   justify-content: space-evenly;
-
-  max-height: 100%;
-  width: 90vw;
+  min-height: 57vh;
+  max-height: 57vh;
+  width: 80vw;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  background-color: rgb(6, 77, 6);
+  background-color: rgba(6, 77, 6, 0.95);
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -235,7 +247,7 @@ select {
   color: white;
   font-family: "Century Gothic";
   height: 45px;
-  margin: 15px;
+  margin: 5px;
   max-width: 45%;
   background-color: transparent;
   border: none;
@@ -289,9 +301,26 @@ button.button:hover {
   word-wrap: break-word;
   border: 1px solid black;
   border-radius: 20px;
-  margin: 25px 25px;
-  padding: 50px 20px;
-  min-width: 375px;
-  max-width: 375px;
+  margin: 25px 0px;
+  padding: 30px 15px;
+  min-width: 255px;
+  max-width: 255px;
   background-color: #000000ed;
+}
+
+input[type="number"]{
+  width:65px; height: 50px;
+  border-radius: 10px;
+  font-family: 'starbucks';
+  font-size: 30px;
+  background-color: transparent;
+  color: white;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  padding:20px 0px;
+  background-color:transparent;
+  margin: 0;
 }
