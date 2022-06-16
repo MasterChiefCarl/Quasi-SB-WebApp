@@ -5,10 +5,7 @@
     use Sessions\Session;
     Session::start();
     class Cart implements iCart {
-        private array $orderList;
-        private $totalAmount = 0;
-
-        public function addToCart($orders)
+        public function addToCart($orders, $ordQty)
         {           
 
             if ($orders['consID'] == '1') {
@@ -22,23 +19,18 @@
                 $tmpValue = $this->getCart();
                 $itemData = array('consName' => $orderedItem->getConsumableName(),
                 'consType' => $orderedItem->getConsType(),
-                'consPrice' => $orderedItem->getPrice()
+                'consPrice' => $orderedItem->getPrice(),
+                'consQty' => $ordQty
                 );
                 array_push($tmpValue, $itemData);
-                Session::add('cart', $tmpValue);
-                // array_push($_SESSION['cart']['consName'], $orderedItem->getConsumableName());
-                // array_push($_SESSION['cart']['consType'], $orderedItem->getConsType());
-                // array_push($_SESSION['cart']['consPrice'], $orderedItem->getPrice());
+                Session::add('cart', $tmpValue);                
             }
             else {
                 $orderedItems[0] = array('consName' => $orderedItem->getConsumableName(),
                 'consType' => $orderedItem->getConsType(),
-                'consPrice' => $orderedItem->getPrice()
-                );
-
-                // $_SESSION['cart']['consName'] = $orderedItem->getConsumableName();
-                // $_SESSION['cart']['consType'] = $orderedItem->getConsType();
-                // $_SESSION['cart']['consPrice'] = $orderedItem->getPrice();
+                'consPrice' => $orderedItem->getPrice(),
+                'consQty' => $ordQty
+                );    
                 Session::add('cart', $orderedItems);             
             }
         }

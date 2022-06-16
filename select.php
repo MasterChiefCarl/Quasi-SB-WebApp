@@ -74,6 +74,8 @@ if (session_status() === PHP_SESSION_NONE) {
             <td>Item #</td>
             <td>Item Name</td>
             <td>Price</td>
+            <td>Qty</td>
+            <td>Total</td>
          </tr>
          <?php
     if(Session::has('cart')) {
@@ -81,9 +83,11 @@ if (session_status() === PHP_SESSION_NONE) {
 
       foreach ($cartItems as $cartCol) {
         echo '<tr>';
-          echo '<td>' . $cartCol['consName'] . '</td>';
           echo '<td>' . $cartCol['consType'] . '</td>';
-          echo '<td style="text-align: right;">' . $cartCol['consPrice'] . '.00</td>';
+          echo '<td>' . $cartCol['consName'] . '</td>';
+          echo '<td>' .'₱'. $cartCol['consPrice'] . '.00</td>';
+          echo '<td>'.$cartCol['consQty'].'</td>';
+          echo '<td>'.'₱'. $cartCol['consPrice'] * $cartCol['consQty'].'.00'.'</td>';
           echo '</tr>';
       }
     }
