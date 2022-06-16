@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php $customer->getCustName(); ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $_SESSION['custName']; ?> : QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
