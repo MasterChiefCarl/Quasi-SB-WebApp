@@ -53,3 +53,9 @@ if (!empty($_POST)) {
 
     $db->table('transactions')->insert([$_SESSION['count']+=1 , '500', $item['prodName'], $item['prodPrice'], $ordQty, $item['prodPrice'] * $ordQty, $_SESSION['custName'], null]);
 }
+
+if(isset($_GET['beverageSizes'])) {
+    $result = $db->select()->from('beverageSizes')->getAll();
+    $jsonResult = json_encode($result);
+    echo $jsonResult;
+}

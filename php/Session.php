@@ -39,9 +39,9 @@ class Session {
         }           
     }
 
-    public static function remove($key){
-            unset($_SESSION[$key]);
-        return true;
+    public static function remove($key, $itemNo){
+            unset($_SESSION[$key][$itemNo]);                        
+        return true;            
     }
 
     public static function has($key){
