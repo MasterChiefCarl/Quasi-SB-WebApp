@@ -144,9 +144,11 @@ p{
   grid-auto-flow: row;
   grid-template-rows: 0 auto 0px;
   align-items: space-between;
-  background-image: url("../assets/bg/background.jpg");
+  background:linear-gradient(rgba(255, 255, 255, 0.1), rgba(255,255,255,0.1)), url("../assets/bg/background.jpg");
   background-size: contain;
 }
+
+  
 .default-layout-body .footer {
   position: sticky;
 }
