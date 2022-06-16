@@ -29,3 +29,9 @@ else if(isset($_GET['products'])) {
     $jsonResult = json_encode($result);
     echo $jsonResult;
 }
+
+if(isset($_GET['beverageSizes'])) {
+    $result = $db->select()->from('beverageSizes')->getAll();
+    $jsonResult = json_encode($result);
+    echo $jsonResult;
+}

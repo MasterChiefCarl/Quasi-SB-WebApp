@@ -12,6 +12,10 @@ $cart = new Cart();
 if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
+
+if ($_GET) {
+  $cart->removeFromCart($_GET['entry']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,22 +25,20 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php $customer->getCustName(); ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $customer->getCustName().' '; ?>:QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
   <script src="js/axios.js" type="text/javascript"></script>
-
-
 </head>
 
 <body>
   <div class="default-layout-body">
     <div class="nav">
       <div class="nav-body">
-        <h3>Welcome To Starbucks <?php echo $_SESSION['custName']; ?></h3>
+        <h3>Welcome To Starbucks <?php echo $customer->getCustName(); ?></h3>
       </div>
     </div>
     <div class="content">
@@ -58,37 +60,54 @@ if (session_status() === PHP_SESSION_NONE) {
             <div id="result-field"></div>
           </center>
         </div>
+      <?php 
+        if (Session::has('cart') && !empty(Session::get('cart'))) {
+      ?>
+        <div id="cart">
+        <table id="cartTable">
+          <tr>
+            <td class="tableLabel">Item #</td>
+            <td class="tableLabel">Item Name</td>
+            <td class="tableLabel">Price</td>
+            <td class="tableLabel">Qty</td>
+            <td class="tableLabel">Size Additional</td>
+            <td class="tableLabel">Total</td>
+          </tr>
+         <?php
+    
+      $cartItems = $cart->getCart();
+
+      foreach ($cartItems as $cartRow => $cartCol) {          
+          echo '<tr>';
+          echo '<td class="tableValue">' . $cartCol['consType'] . '</td>';
+          echo '<td class="tableValue">' . $cartCol['consName'] . '</td>';
+          echo '<td class="tableValue">' .'₱ '. $cartCol['consPrice'] . '.00</td>';
+          echo '<td class="tableValue">'.$cartCol['consQty'].'</td>';
+          echo '<td class="tableValue">'. $cartCol['consSizeAdd']. '</td>';
+          echo '<td class="tableValue">'.'₱ '. ($cartCol['consPrice'] + $cartCol['consSizeAdd']) * $cartCol['consQty'].'.00'.'</td>';
+          echo '<td>'.'<a href="select.php?entry='.$cartRow.'"id="removeBtn">'.'Remove'.'</a></td>';
+          echo '</tr>';
+      }
+        echo '<tr>';
+        echo '<td colspan="5" align="center">'.''.'</td>';
+        echo '<td class="tableValue">'.$cart->calculateBill().'</td>';        
+        echo '</tr>';        
+    
+  ?>
+  </table>
+        </div>
+    <?php
+        }
+    ?>
       </div>
     </div>
-    <div id="cart">
-
-    </div>
+    
     <div class="footer">
       <div class="footer-body">
         <h3>Made with 💖 by Group 1 Jungco, Lapiz, Garces</h3>
       </div>
     </div>
   </div>
-  <table width="500">
-  <tr>
-            <td>Item #</td>
-            <td>Item Name</td>
-            <td>Price</td>
-         </tr>
-         <?php
-    if(Session::has('cart')) {
-      $cartItems = $cart->getCart();
-
-      foreach ($cartItems as $cartCol) {
-        echo '<tr>';
-          echo '<td>' . $cartCol['consName'] . '</td>';
-          echo '<td>' . $cartCol['consType'] . '</td>';
-          echo '<td style="text-align: right;">' . $cartCol['consPrice'] . '.00</td>';
-          echo '</tr>';
-      }
-    }
-  ?>
-  </table>
 </body>
 <script src="js/select.js" type="text/javascript">
   //value layout is different due to the fact that this is JAVASCRIPT and not PHP

@@ -136,6 +136,7 @@ function showProducts(response) {
 
         prodContainer.appendChild(paragraph2);
 
+        var sizeField = document.createElement("select");
         var qtyField = document.createElement("input");
         var addBtn = document.createElement("button");
         var linebreak = document.createElement("br");
@@ -143,17 +144,25 @@ function showProducts(response) {
         qtyField.value = 1;
         qtyField.type = 'number';
         qtyField.id = 'qtyField';
+        qtyField.min = 1;
         qtyField.innerHTML = qtyField.value;
+
+        createSizeField(result.data[i].consID, sizeField);
+
+        if (result.data[i].consID == '1') {
+            prodContainer.appendChild(sizeField);
+        }
 
         prodContainer.appendChild(qtyField);
         prodContainer.appendChild(linebreak);
         // rawdata += `<input type='number' value='1' id='qtyField' align='center'><br>`;
         // rawdata += `<button class="button" id='addBtn' align="center">Add to order</button></center></div>`;
-        addBtn.onclick = (function (data, qtyField) {
+        addBtn.onclick = (function (data, qtyField, sizeField) {
             return function () {
-                getProdData(data, qtyField.value);
+                if (qtyField.value >= 1)
+                    getProdData(data, qtyField.value, sizeField.value);
             };
-        })(result.data[i], qtyField);
+        })(result.data[i], qtyField, sizeField);
 
         addBtn.className = "button";
         addBtn.name = "add";
@@ -165,12 +174,36 @@ function showProducts(response) {
     document.getElementById("result-field").appendChild(rawdata);
 }
 
-function getProdData(data, ordQty) {
+function createSizeField(consID, sizeField) {
+
+    axios.get('dbquery.php', {
+        params: {
+            beverageSizes: true
+        },
+    }).then(response => {
+        if (consID == '1') {
+            for (i in response.data) {
+                var sizeOptions = document.createElement("option");
+                sizeOptions.value = response.data[i].sizeAddPrice;
+                sizeOptions.text = response.data[i].sizeName;
+                sizeField.appendChild(sizeOptions);
+            }
+        }
+
+    }).catch(error => {
+        console.error(error);
+    })
+
+
+}
+
+function getProdData(data, ordQty, itemSizeAdd) {
 
     axios.post('api.php',
         {
             items: data,
-            ordQty: ordQty
+            ordQty: ordQty,
+            itemSizeAdd: itemSizeAdd
         })
         .then((response) => {
             const { data } = response;
@@ -180,17 +213,5 @@ function getProdData(data, ordQty) {
             console.error(error);
         })
 
-    console.log(data.prodName + "\n" + ordQty);
+    console.log(data.prodName + " " + ordQty + " " + itemSizeAdd);
 }
-
-// function showData(response) {
-//     var res = response;
-
-//     for (i in res) {
-//         var p = document.createElement('p');
-//         p.innerHTML = res.data[i].ordQty;
-//         document.getElementById('cart').appendChild(p);
-//     }
-
-
-// }
