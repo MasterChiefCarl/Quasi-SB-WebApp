@@ -12,17 +12,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #f1f1f1;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  background: #555;
 }
 * {
   margin: 0;
@@ -43,7 +43,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  width: 100%;
+  width: 50%;
   font: normal 12px/2em "Century Gothic";
 }
 img {
@@ -53,12 +53,16 @@ img {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
-img.smol{
+img.smol {
   height: 100px;
   width: 100px;
 }
-img.prod{
-  border-radius: 25px;
+img.prod {
+  width:300px;
+  height: 300px;
+  border-radius: 50px;
+  -webkit-filter: drop-shadow(5px 5px 5px rgb(0, 0, 0));
+  filter: drop-shadow(5px 5px 5px rgb(0, 0, 0));
 }
 
 /* Header configuration */
@@ -94,22 +98,29 @@ h1 {
 }
 h2 {
   letter-spacing: 1.25px;
-  font-size: 1.75em;
+  font-size: 3.5em;
   margin-bottom: 15px;
 }
 h3 {
   letter-spacing: 1.55px;
   font-size: 1.2em;
 }
-h4{
+h4 {
   letter-spacing: 1.55px;
   font-size: 1.1em;
+  height:100%;
+  max-width:350px;
 }
-h5{
+h5 {
   letter-spacing: 1.55px;
-  font-size: 1.0em;
+  font-size: 1em;
+  width: 80%;
 }
-
+p{
+  font-size:1em;
+  text-align: center;
+  width: 100%;
+}
 /*body-layout configuration*/
 .default-layout-body {
   display: grid;
@@ -194,7 +205,7 @@ h5{
   justify-content: space-evenly;
 
   max-height: 100%;
-  width: 75vw;
+  width: 90vw;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
@@ -220,22 +231,22 @@ input.text:focus {
   text-align: center;
   border: none;
 }
-select{
-  color:white;
+select {
+  color: white;
   font-family: "Century Gothic";
   height: 45px;
-  margin:15px;
+  margin: 15px;
   max-width: 45%;
-  background-color:transparent;
+  background-color: transparent;
   border: none;
   border-bottom: 3px black solid;
-  transition-duration:0.5;
+  transition-duration: 0.5;
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
 }
-select option{
-  color:white;
-  background-color:black;
+select option {
+  color: white;
+  background-color: black;
   border: none;
 }
 
@@ -275,14 +286,12 @@ button.button:hover {
   max-height: 100%;
 }
 .product {
+  word-wrap: break-word;
   border: 1px solid black;
   border-radius: 20px;
-  margin: 10px;
-  padding: 10px;
-  min-width: 300px;
-  max-width: 350px;
-  background-color: #ffffffad;
-  animation: fadeInAnimation ease 3s;
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
+  margin: 25px 25px;
+  padding: 50px 20px;
+  min-width: 375px;
+  max-width: 375px;
+  background-color: #000000ed;
 }

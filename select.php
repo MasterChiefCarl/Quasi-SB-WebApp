@@ -20,7 +20,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php echo $_SESSION['custName']; ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $_SESSION['custName']; ?> : QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -158,11 +158,12 @@ if (session_status() === PHP_SESSION_NONE) {
 
   function showProducts(response) {
     var result = response;
-    rawdata = '<div class="scrollmenu"><form action="select.php" method="post">';
+    var rawdata = '<center><h4> Returned '+(result.data).length+' products</h4></center>';
+    rawdata += '<br><div class="scrollmenu"><form action="select.php" method="post">';
 
     for (i in result.data) {
       rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
-        result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
+        result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h1>₱' + result.data[i].prodPrice + '.00</h1><br>';
 
       rawdata += '<button class="button" align="center">Add to order</button></center></div>';
     }
