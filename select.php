@@ -6,10 +6,17 @@ require_once 'php/Session.php';
 
 use Sessions\Session;
 
+$customer = new Customer();
+
 if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
 
+$data = json_decode(file_get_contents("php://input"), true);
+
+if(isset($data['items'])) {
+  var_dump($data['items']['prodName']);
+}
 
 ?>
 <!DOCTYPE html>
@@ -20,7 +27,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php echo $_SESSION['custName']; ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php $customer->getCustName(); ?>:QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -66,110 +73,8 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
   </div>
 </body>
-<script>
+<script src="js/select.js" type="text/javascript">
   //value layout is different due to the fact that this is JAVASCRIPT and not PHP
-  var nocoffee = '<h3>No Results Found</h3><br><img src="assets/logo/nocoffee.png" class="smol">';
-
-  document.getElementById("result-field").innerHTML = this.nocoffee;
-  window.addEventListener("load", getConsumables);
-  document.getElementById("consumables").addEventListener("change", getSubConsumables);
-  document.getElementById("subconsumables").addEventListener("change", getProducts);
-
-  function getConsumables() {
-    axios
-      .get("dbquery.php", {
-        params: {
-          consumables: true,
-        },
-      })
-      .then((response) => showConsumables(response))
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function showConsumables(response) {
-    var result = response;
-    for (i in result.data) {
-      var option = document.createElement("option");
-      option.value = result.data[i].consID;
-      option.text = result.data[i].consName;
-      var select = document.getElementById("consumables");
-      select.appendChild(option);
-    }
-  }
-
-  function getSubConsumables() {
-    var id = document.getElementById("consumables").value;
-
-    document.getElementById("subconsumables").disabled = id > 0 ? false : true;
-    document.getElementById("result-field").innerHTML = id > 0 ? nocoffee : nocoffee;
-
-    axios
-      .get("dbquery.php", {
-        params: {
-          subconsumables: id,
-        },
-      })
-      .then((response) => showSubConsumables(response))
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
-  function showSubConsumables(response) {
-    var result = response;
-    layout = `
-    <option value="starter" selected>-- Select --</option>
-    `;
-    for (i in result.data) {
-      layout +=
-        "<option value=" +
-        result.data[i].subconsID +
-        ">" +
-        result.data[i].subconsName +
-        "</option>";
-    }
-
-    document.getElementById("subconsumables").innerHTML = layout;
-  }
-
-  function getProducts() {
-    var id = document.getElementById("subconsumables").value;
-
-    document.getElementById("result-field").innerHTML = id != 'starter' ? nocoffee : nocoffee;
-
-    if (id != "starter") {
-      axios
-        .get("dbquery.php", {
-          params: {
-            products: id,
-          },
-        })
-        .then((response) => showProducts(response))
-        .catch((error) => {
-          console.error(error);
-        });
-    } else {
-      document.getElementById("result-field").innerHTML = nocoffee;
-    }
-
-  }
-
-  function showProducts(response) {
-    var result = response;
-    rawdata = '<div class="scrollmenu"><form action="select.php" method="post">';
-
-    for (i in result.data) {
-      rawdata += '<div class="scroll"><center><div class="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
-        result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
-
-      rawdata += '<button class="button" align="center">Add to order</button></center></div>';
-    }
-    rawdata += '</form></div>';
-
-    document.getElementById("result-field").innerHTML = rawdata;
-  }
 </script>
 
 </html>

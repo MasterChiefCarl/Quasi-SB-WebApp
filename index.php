@@ -6,6 +6,8 @@ require_once 'php/Session.php';
 
 use Sessions\Session;
 
+$customer = new Customer();
+
 if (!$_REQUEST && session_id() != '') {
   Session::stop();
   //last session destroyer!
@@ -17,7 +19,9 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if ($_REQUEST && $_REQUEST["custName"] != null) {
-  Session::add('custName', $_REQUEST["custName"]);
+  $customer->setCustName($_POST['custName']);
+
+  // Session::add('custName', $_REQUEST["custName"]);
   if (Session::has('custName')) {
     header("location:select.php");
   }

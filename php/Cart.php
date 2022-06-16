@@ -6,7 +6,7 @@
 
     class Cart implements iCart {
         private array $orderList;
-        private $totalBill = 0;
+        private $totalAmount = 0;
 
         public function addToCart($orders)
         {

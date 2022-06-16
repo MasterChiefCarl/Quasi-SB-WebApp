@@ -1,13 +1,12 @@
 <?php    
     declare(strict_types = 1);
-
-    require_once 'init.php';
     use Sessions\Session;
     
     class Customer implements ICustomer {
         private string $custName;
 
-        public function __construct ($custName) {
+        public function setCustName(string $custName)
+        {
             if(!Session::has('custName') or Session::has('custName')) {
                 $_SESSION['custName'] = $custName;
             }
