@@ -170,11 +170,12 @@ p {
 /* layout of contents of the part's bodies*/
 .nav .nav-body {
   height: 100%;
-  display: grid;
-  justify-content: center;
+  display: flex;
+  justify-content: space-around;
   align-content: center;
   color: white;
   background-color: rgb(120, 59, 2);
+  align-items: center;
 }
 
 .content .content-body {
@@ -276,7 +277,8 @@ p {
   min-height: 65.5vh;
   max-height: 65.5vh;
   margin: 20px;
-  width: 85vw;padding:50px 10px;
+  width: 85vw;
+  padding: 50px 10px;
   background-color: rgba(6, 77, 6, 0.8);
   border: 1px solid black;
   border-radius: 10px;

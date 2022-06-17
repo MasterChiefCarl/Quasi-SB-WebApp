@@ -50,7 +50,9 @@ if ($_GET) {
   <div class="default-layout-body">
     <div class="nav">
       <div class="nav-body">
+        <a href="index.php?return=true"><img src="assets/logo/starbucks.png" style="margin:0;width:25px;height:25px;"></a>
         <h3>Welcome To Starbucks <?php echo $customer->getCustName(); ?></h3>
+        <a href="index.php?return=true"><img src="assets/images/back.png" style="margin:0;width:25px;height:25px;"></a>
       </div>
     </div>
     <div class="content">

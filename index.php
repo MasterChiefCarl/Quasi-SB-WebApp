@@ -17,7 +17,17 @@ if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
 
-if ($_REQUEST && $_REQUEST["custName"] != null) {
+if ($_GET){
+  if(isset($_GET["return"])){
+    if($_GET["return"]== true){
+      Session::stop();
+
+    }
+    Session::start(); 
+  }
+}
+if ($_REQUEST) {
+  if(isset($_REQUEST["custName"]))
   $customer->setCustName($_POST['custName']);
 
   // Session::add('custName', $_REQUEST["custName"]);
