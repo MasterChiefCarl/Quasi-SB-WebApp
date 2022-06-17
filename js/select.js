@@ -137,39 +137,43 @@ function showProducts(response) {
 
     prodContainer.appendChild(imgContainer);
 
-        var paragraph2 = document.createElement('h2');
-        paragraph2.innerHTML = "₱ " + result.data[i].prodPrice + ".00";
+    var paragraph2 = document.createElement('h2');
+    paragraph2.innerHTML = "₱ " + result.data[i].prodPrice + ".00";
 
     prodContainer.appendChild(paragraph2);
 
-        var sizeField = document.createElement("select");
-        var qtyField = document.createElement("input");
-        var addBtn = document.createElement("button");
-        var linebreak = document.createElement("br");
+    var sizeField = document.createElement("select");
+    var qtyField = document.createElement("input");
+    var addBtn = document.createElement("button");
+    var linebreak = document.createElement("br");
 
-        qtyField.value = 1;
-        qtyField.min= '1';
-        qtyField.type = 'number';
-        qtyField.id = 'qtyField';
-        qtyField.min = 1;
-        qtyField.innerHTML = qtyField.value;
+    qtyField.value = 1;
+    qtyField.min = '1';
+    qtyField.type = 'number';
+    qtyField.id = 'qtyField';
+    qtyField.min = 1;
+    qtyField.innerHTML = qtyField.value;
 
-        createSizeField(result.data[i].consID, sizeField);
+    sizeField.className='sizeField';
+    createSizeField(result.data[i].consID, sizeField);
 
-        if (result.data[i].consID == '1') {
-            prodContainer.appendChild(sizeField);
-        }
+    if (result.data[i].consID == '1') {
+      prodContainer.appendChild(sizeField);
+    }
 
-        prodContainer.appendChild(qtyField);
-        prodContainer.appendChild(linebreak);
-        // rawdata += `<input type='number' value='1' id='qtyField' align='center'><br>`;
-        // rawdata += `<button class="button" id='addBtn' align="center">Add to order</button></center></div>`;
-        addBtn.onclick = (function (data, qtyField, sizeField) {
-            return function () {
-                if (qtyField.value >= 1)
-                    getProdData(data, qtyField.value, sizeField.value);
-            };
-        })(result.data[i], qtyField, sizeField);
+    prodContainer.appendChild(qtyField);
+    prodContainer.appendChild(linebreak);
+    // rawdata += `<input type='number' value='1' id='qtyField' align='center'><br>`;
+    // rawdata += `<button class="button" id='addBtn' align="center">Add to order</button></center></div>`;
+    addBtn.onclick = (function (data, qtyField, sizeField) {
+      return function () {
+        if (qtyField.value >= 1)
+          getProdData(data, qtyField.value, sizeField.value);
+        window.alert('Product' + data.prodName +' has been added to Cart. Please check below of page for your Cart List.');
+        window.location.href = 'select.php';
+      };
+
+    })(result.data[i], qtyField, sizeField);
 
     addBtn.className = "button";
     addBtn.name = "add";
@@ -208,23 +212,23 @@ function addOrder(response, ordQty) {
 
 function createSizeField(consID, sizeField) {
 
-    axios.get('dbquery.php', {
-        params: {
-            beverageSizes: true
-        },
-    }).then(response => {
-        if (consID == '1') {
-            for (i in response.data) {
-                var sizeOptions = document.createElement("option");
-                sizeOptions.value = response.data[i].sizeAddPrice;
-                sizeOptions.text = response.data[i].sizeName;
-                sizeField.appendChild(sizeOptions);
-            }
-        }
+  axios.get('dbquery.php', {
+    params: {
+      beverageSizes: true
+    },
+  }).then(response => {
+    if (consID == '1') {
+      for (i in response.data) {
+        var sizeOptions = document.createElement("option");
+        sizeOptions.value = response.data[i].sizeAddPrice;
+        sizeOptions.text = response.data[i].sizeName;
+        sizeField.appendChild(sizeOptions);
+      }
+    }
 
-    }).catch(error => {
-        console.error(error);
-    })
+  }).catch(error => {
+    console.error(error);
+  })
 
 
 }
@@ -241,20 +245,20 @@ function getProdData(data, ordQty, itemSizeAdd) {
     .catch((error) => {
       console.error(error);
     });
-    
-    axios.post('api.php',
-        {
-            items: data,
-            ordQty: ordQty,
-            itemSizeAdd: itemSizeAdd
-        })
-        .then((response) => {
-            const { data } = response;
-            console.log(response.data);
-        })
-        .catch(error => {
-            console.error(error);
-        })
 
-    console.log(data.prodName + " " + ordQty + " " + itemSizeAdd);
+  axios.post('api.php',
+    {
+      items: data,
+      ordQty: ordQty,
+      itemSizeAdd: itemSizeAdd
+    })
+    .then((response) => {
+      const { data } = response;
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+
+  console.log(data.prodName + " " + ordQty + " " + itemSizeAdd);
 }

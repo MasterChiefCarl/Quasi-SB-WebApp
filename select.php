@@ -15,6 +15,10 @@ if (session_status() === PHP_SESSION_NONE) {
 
 if ($_GET) {
   $cart->removeFromCart($_GET['entry']);
+  echo ("<script LANGUAGE='JavaScript'>
+  window.alert('Entry has been removed. Succesfully Updated!');
+  window.location.href='select.php';
+  </script>");
 }
 ?>
 <!DOCTYPE html>
@@ -25,7 +29,7 @@ if ($_GET) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php echo $customer->getCustName().' '; ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $customer->getCustName() . ' '; ?>:QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -60,55 +64,77 @@ if ($_GET) {
             <div id="result-field"></div>
           </center>
         </div>
-      <?php 
+        <br><br>
+        <?php
         if (Session::has('cart') && !empty(Session::get('cart'))) {
-      ?>
-        <div id="cart">
-        <table id="cartTable">
-          <tr>
-            <td class="tableLabel">Item #</td>
-            <td class="tableLabel">Item Name</td>
-            <td class="tableLabel">Price</td>
-            <td class="tableLabel">Qty</td>
-            <td class="tableLabel">Size Additional</td>
-            <td class="tableLabel">Total</td>
-          </tr>
-         <?php
-    
-      $cartItems = $cart->getCart();
+        ?>
+          <div class="dialogue-box-alt-wide" id="cart">
+            <table id="cartTable">
+              <tr>
+                <td class="tableLabel">Item Type Code</td>
+                <td class="tableLabel">Item Type </td>
+                <td class="tableLabel">Item Name</td>
+                <td class="tableLabel">Price</td>
+                <td class="tableLabel">Qty</td>
+                <td class="tableLabel">Size Additional</td>
+                <td class="tableLabel">Total</td>
+              </tr>
+              <?php
 
-      foreach ($cartItems as $cartRow => $cartCol) {          
-          echo '<tr>';
-          echo '<td class="tableValue">' . $cartCol['consType'] . '</td>';
-          echo '<td class="tableValue">' . $cartCol['consName'] . '</td>';
-          echo '<td class="tableValue">' .'₱ '. $cartCol['consPrice'] . '.00</td>';
-          echo '<td class="tableValue">'.$cartCol['consQty'].'</td>';
-          echo '<td class="tableValue">'. $cartCol['consSizeAdd']. '</td>';
-          echo '<td class="tableValue">'.'₱ '. ($cartCol['consPrice'] + $cartCol['consSizeAdd']) * $cartCol['consQty'].'.00'.'</td>';
-          echo '<td>'.'<a href="select.php?entry='.$cartRow.'"id="removeBtn">'.'Remove'.'</a></td>';
-          echo '</tr>';
-      }
-        echo '<tr>';
-        echo '<td colspan="5" align="center">'.''.'</td>';
-        echo '<td class="tableValue">'.$cart->calculateBill().'</td>';        
-        echo '</tr>';        
-    
-  ?>
-  </table>
-        </div>
-    <?php
+              $cartItems = $cart->getCart();
+
+              foreach ($cartItems as $cartRow => $cartCol) {
+                echo '<tr>';
+                echo '<td class="tableValue">' . $cartCol['consType'] . '</td>';
+                switch ($cartCol['consType']) {
+                  case 1:
+                    echo '<td class="tableValue"> Tea </td>';
+                    break;
+                  case 2:
+                    echo '<td class="tableValue"> Frappe </td>';
+                    break;
+                  case 3:
+                    echo '<td class="tableValue"> Coffee </td>';
+                    break;
+                  case 4:
+                    echo '<td class="tableValue"> Sandwhich </td>';
+                    break;
+                  case 5:
+                    echo '<td class="tableValue"> Wrap </td>';
+                    break;
+                  case 6:
+                    echo '<td class="tableValue"> Cake </td>';
+                    break;
+                }
+                echo '<td class="tableValue">' . $cartCol['consName'] . '</td>';
+                echo '<td class="tableValue">' . '₱ ' . $cartCol['consPrice'] . '.00</td>';
+                echo '<td class="tableValue">' . $cartCol['consQty'] . '</td>';
+                echo '<td class="tableValue">' . $cartCol['consSizeAdd'] . '</td>';
+                echo '<td class="tableValue">' . '₱ ' . ($cartCol['consPrice'] + $cartCol['consSizeAdd']) * $cartCol['consQty'] . '.00' . '</td>';
+                echo '<td>' . '<a href="select.php?entry=' . $cartRow . '"id="removeBtn">' . 'Remove' . '</a></td>';
+                echo '</tr>';
+              }
+              echo '<tr>';
+              echo '<td colspan="6" align="right" style="border-top: 2px solid white;">' . 'Total Bill' . '</td>';
+              echo '<td class="tableValue" style="border-top: 2px solid white;">' . $cart->calculateBill() . '</td>';
+              echo '</tr>';
+
+              ?>
+            </table>
+          </div>
+        <?php
         }
-    ?>
+        ?>
       </div>
     </div>
-    
+
     <div class="footer">
       <div class="footer-body">
         <h3>Made with 💖 by Group 1 Jungco, Lapiz, Garces</h3>
       </div>
     </div>
   </div>
-    
+
 </body>
 <script src="js/select.js" type="text/javascript">
   //value layout is different due to the fact that this is JAVASCRIPT and not PHP

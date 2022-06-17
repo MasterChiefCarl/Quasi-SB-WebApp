@@ -177,41 +177,20 @@ p{
   overflow: none;
   padding: 20px;
   display: grid;
-  place-items: center;
+  place-items:initial;
   justify-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-#cart {
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0 20px 0;
-  background-color: white;
-}
-
-#cartTable {
-  margin: 0 auto;
-  border-spacing: .5em;
-}
-
-.tableLabel {
-  text-align: center;
-  font-weight: bold;
-  font-size: 14px;
-  width: 100px;
-}
-
-.tableValue {
-  text-align: center;
+  justify-content: space-around;
+  /* height: 100%; */
 }
 
 #removeBtn {
-  background-color: white;
+  background-color: green;
   border-radius: 5px;
-  padding: 5px;
+  border: 1px solid black;
+  padding: 5px 20px;
   text-decoration: none;
-  color: red;
+  color:white;
+  transition-duration: .75s;
 }
 
 #removeBtn:hover {
@@ -261,17 +240,27 @@ p{
   border: 1px solid black;
   border-radius: 10px;
 }
+.dialogue-box-alt-wide {
+  justify-items: center;
+  justify-content: space-evenly;
+  max-height: 100%;
+  width: 50vw;
+  padding:25px;
+  background-color: rgba(6, 77, 6, 0.7);
+  border: 1px solid black;
+  border-radius: 10px;
+}
 .dialogue-box-plus {
   justify-items: center;
   justify-content: space-evenly;
-  min-height: 57vh;
-  max-height: 57vh;
-  width: 80vw;
+  min-height:65vh;
+  max-height: 65vh;
+  width: 75vw;
   padding-top: 50px;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 50px;
-  background-color: rgba(6, 77, 6, 0.95);
+  background-color: rgba(6, 77, 6, 0.8);
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -309,6 +298,14 @@ select {
 select option {
   color: white;
   background-color: black;
+  border: none;
+}
+select.sizeField {
+  border-bottom: 3px white solid;
+}
+select.sizeField option {
+  color: black;
+  background-color: white;
   border: none;
 }
 
@@ -361,20 +358,7 @@ button.button:hover {
   background-color: #000000ed;
 }
 
-#qtyField {
-  height: 25px;
-  width: 35px;
-  border: none;
-  border-radius: 5px;
-  text-align: center;
-}
 
-#qtyField::-webkit-inner-spin-button,
-#qtyField::-webkit-outer-spin-button {
-
-  opacity: 1;
-
-}
 input[type="number"]{
   width:65px; height: 50px;
   border-radius: 10px;
@@ -390,4 +374,30 @@ input::-webkit-inner-spin-button {
   padding:20px 0px;
   background-color:transparent;
   margin: 0;
+  opacity:1;
 }
+
+/*Table layouts and designs*/
+/* #cart {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0 20px 0;
+  background-color: white;
+} */
+
+#cartTable {
+  margin: 0 auto;
+  border-spacing: .5em;
+  color:white;
+}
+
+.tableLabel {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  width: 100px;
+}
+
+.tableValue {
+  text-align: center;
+} 
