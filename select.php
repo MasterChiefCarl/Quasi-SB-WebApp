@@ -12,6 +12,22 @@ $cart = new Cart();
 if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
+
+if ($_GET) {
+  if (isset($_GET['entry'])) {
+    $cart->removeFromCart($_GET['entry']);
+    echo ("<script LANGUAGE='JavaScript'>
+  window.alert('Entry has been removed. Succesfully Updated!');
+  window.location.href='select.php';
+  </script>");
+  }
+  if (isset($_GET['checkout'])) {
+    echo ("<script LANGUAGE='JavaScript'>
+  window.alert('You have selected checkout. Please Wait...');
+  window.location.href='checkout.php';
+  </script>");
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
