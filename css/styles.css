@@ -143,6 +143,7 @@ p {
 /* layout positioning of the 3 parts  */
 .default-layout-body .nav {
   position: sticky;
+  background-color: rgb(120, 59, 2);
 }
 
 .default-layout-body .content {
@@ -170,11 +171,11 @@ p {
 /* layout of contents of the part's bodies*/
 .nav .nav-body {
   height: 100%;
+  margin:0px 20px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
   color: white;
-  background-color: rgb(120, 59, 2);
   align-items: center;
 }
 

@@ -5,6 +5,7 @@ require_once 'php/init.php';
 require_once 'php/Session.php';
 
 use Sessions\Session;
+
 $customer = new Customer();
 
 if (!$_REQUEST && session_id() != '') {
@@ -17,18 +18,17 @@ if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
 
-if ($_GET){
-  if(isset($_GET["return"])){
-    if($_GET["return"]== true){
+if ($_GET) {
+  if (isset($_GET["return"])) {
+    if ($_GET["return"] == true) {
       Session::stop();
-
     }
-    Session::start(); 
+    Session::start();
   }
 }
 if ($_REQUEST) {
-  if(isset($_REQUEST["custName"]))
-  $customer->setCustName($_POST['custName']);
+  if (isset($_REQUEST["custName"]))
+    $customer->setCustName($_POST['custName']);
 
   // Session::add('custName', $_REQUEST["custName"]);
   if (Session::has('custName')) {
@@ -50,13 +50,15 @@ if ($_REQUEST) {
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="shortcut icon" type="image/x-icon" href="assets/logo/starbucks.png" />
-  
+
 </head>
 
 <body>
   <div class="default-layout-body">
     <div class="nav">
-      <div class="nav-body"><h3>Welcome To Starbucks</h3></div>
+      <div class="nav-body">
+        <h3>Welcome To Starbucks</h3>
+      </div>
     </div>
     <div class="content">
       <div class="content-body">
