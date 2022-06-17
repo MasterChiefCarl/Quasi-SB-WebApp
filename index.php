@@ -33,7 +33,6 @@ if ($_REQUEST) {
       header("location:select.php");
     }
   }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
