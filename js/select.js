@@ -1,5 +1,4 @@
-var nocoffee =
-  '<h3>No Results Found</h3><br><img src="assets/logo/nocoffee.png" class="smol">';
+var nocoffee = '<h3>No Results Found</h3><br><img src="assets/logo/nocoffee.png" class="smol">';
 
 document.getElementById("result-field").innerHTML = this.nocoffee;
 window.addEventListener("load", getConsumables);
@@ -97,17 +96,11 @@ function showProducts(response) {
   var rawdata = document.createElement("div");
   rawdata.className = "scrollmenu";
 
-  // rawdata = '<div class="scrollmenu">';
-  // <form action="select.php" method="post">'
   var formContainer = document.createElement("form");
   formContainer.method = "post";
   formContainer.action = "select.php";
 
-  // rawdata.appendChild(formContainer);
   for (i in result.data) {
-    // rawdata += '<div class="scroll"><center><div class="product" id="product"><h2>' + result.data[i].prodID + '</h2><h4><p>' +
-    //     result.data[i].prodName + '</p></h4><img class="prod" src="assets/images/products/' + result.data[i].imagePath + '"><br><h5>₱' + result.data[i].prodPrice + '.00</h5><br>';
-
     var scrollContainer = document.createElement("div");
     scrollContainer.className = "scroll";
 
@@ -119,17 +112,15 @@ function showProducts(response) {
 
     scrollContainer.appendChild(prodContainer);
 
-    var prodIDLabel = document.createElement("h2");
-    prodIDLabel.innerHTML = result.data[i].prodID;
-
-    prodContainer.appendChild(prodIDLabel);
+    var nameContainer = document.createElement('div');
+    nameContainer.id = "nameContainer";
 
     var paragraph = document.createElement("h4");
-    var prodNameLabel = document.createElement("p");
-    prodNameLabel.innerHTML = result.data[i].prodName;
+    paragraph.id = "prodName";
+    paragraph.innerHTML = result.data[i].prodName;
 
-    prodContainer.appendChild(paragraph);
-    paragraph.appendChild(prodNameLabel);
+    nameContainer.appendChild(paragraph);
+    prodContainer.appendChild(nameContainer);
 
     var imgContainer = document.createElement("img");
     imgContainer.className = "prod";
@@ -154,7 +145,7 @@ function showProducts(response) {
     qtyField.min = 1;
     qtyField.innerHTML = qtyField.value;
 
-    sizeField.className='sizeField';
+    sizeField.className = 'sizeField';
     createSizeField(result.data[i].consID, sizeField);
 
     if (result.data[i].consID == '1') {
@@ -163,14 +154,16 @@ function showProducts(response) {
 
     prodContainer.appendChild(qtyField);
     prodContainer.appendChild(linebreak);
-    // rawdata += `<input type='number' value='1' id='qtyField' align='center'><br>`;
-    // rawdata += `<button class="button" id='addBtn' align="center">Add to order</button></center></div>`;
+
     addBtn.onclick = (function (data, qtyField, sizeField) {
       return function () {
-        if (qtyField.value >= 1)
+        if (qtyField.value >= 1) {
           getProdData(data, qtyField.value, sizeField.value);
-        window.alert('Product ' + data.prodName +' has been added to Cart. Please check below of page for your Cart List.');
-        window.location.href = 'select.php';
+          window.alert(data.prodName + ' has been added to your Cart.' + '\n' + 'Please check below to see items added in your Cart.');
+        }
+        else {
+          window.alert('Failed to add ' + data.prodName + ' to your cart. \nQuantity entered is lesser than 1');
+        }
       };
 
     })(result.data[i], qtyField, sizeField);
@@ -184,17 +177,6 @@ function showProducts(response) {
   }
   document.getElementById("result-field").appendChild(rawdata);
 }
-
-// function showData(response) {
-//     var res = response;
-
-//     for (i in res) {
-//         var p = document.createElement('p');
-//         p.innerHTML = res.data[i].ordQty;
-//         document.getElementById('cart').appendChild(p);
-//     }
-
-// }
 
 function addOrder(response, ordQty) {
   var result = response;
@@ -255,10 +237,124 @@ function getProdData(data, ordQty, itemSizeAdd) {
     .then((response) => {
       const { data } = response;
       console.log(response.data);
+      getItemsInCart();
     })
     .catch(error => {
       console.error(error);
     })
 
   console.log(data.prodName + " " + ordQty + " " + itemSizeAdd);
+}
+
+function getItemsInCart() {
+  axios
+    .get("api.php", {
+      params: {
+        itemsInCart: true,
+      },
+    })
+    .then((itemsInCart) => {
+      axios
+        .get("api.php", {
+          params: {
+            cartTotalBill: true,
+          },
+        })
+        .then((cartTotalBill) => {
+          showItemsInCart(itemsInCart, cartTotalBill);
+        }).catch((error) => {
+          console.error(error);
+        });
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function showItemsInCart(itemsInCart, cartTotalBill) {
+  var res = itemsInCart;
+  var bill = cartTotalBill;
+  var subConsName;
+
+  if (bill.data != '₱ 0.00') {
+    var cartTable = `
+              <div class="dialogue-box-alt-wide" id="cart">
+              <table id="cartTable">
+              <tr>
+                  <td class="tableLabel">Item Type</td>
+                  <td class="tableLabel">Item Name</td>
+                  <td class="tableLabel">Price</td>
+                  <td class="tableLabel">Qty</td>
+                  <td class="tableLabel">Size Additional</td>
+                  <td class="tableLabel">Total</td>
+              </tr>            
+          `;
+
+    for (i in res.data) {
+
+      switch (res.data[i].consType) {
+        case "1": subConsName = "Tea";
+          break;
+        case "2": subConsName = "Frappe";
+          break;
+        case "3": subConsName = "Coffee";
+          break;
+        case "4": subConsName = "Sandwich";
+          break;
+        case "5": subConsName = "Wrap";
+          break;
+        case "6": subConsName = "Cake";
+          break;
+      }
+
+      cartTable += `
+              <tr>
+                  <td class="tableValue">${subConsName}</td>
+                  <td class="tableValue">${res.data[i].consName}</td>
+                  <td class="tableValue">₱ ${res.data[i].consPrice}</td>
+                  <td class="tableValue">${res.data[i].consQty}</td>
+                  <td class="tableValue">${res.data[i].consSizeAdd}</td>
+                  <td class="tableValue">₱ ${(res.data[i].consPrice + res.data[i].consSizeAdd) * res.data[i].consQty}.00</td>
+                  <td class="tableValue">
+                      <button id="removeBtn" onclick="removeFromCart('${i}', '${res.data[i].consName}')">Remove</button>
+                  </td>
+              </tr>            
+              `;
+    }
+    cartTable += `
+              <tr>
+                  <td colspan="6" align="right" style="border-top: 2px solid white;">Total Bill</td>
+                  <td class="tableValue">${bill.data}</td>
+              </tr>
+              <tr>
+                  <td colspan="7" align="center">
+                      <button id="checkoutBtn" onclick="">Place Order</button>
+                  </td>
+              </tr>
+              </table>
+              </div>
+              `;
+  }
+  else {
+    var cartTable = '';
+  }
+
+  document.getElementById('cartContainer').innerHTML = cartTable;
+}
+
+function removeFromCart(itemCartID, consName) {
+  console.log(itemCartID);
+
+  axios.post('api.php',
+    {
+      itemCartID: itemCartID
+    })
+    .then((response) => {
+      const { data } = response;
+      window.alert(consName + ' has been successfully removed from your cart.');
+      getItemsInCart();
+    })
+    .catch(error => {
+      console.error(error);
+    })
 }

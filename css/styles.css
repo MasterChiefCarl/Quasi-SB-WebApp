@@ -59,10 +59,12 @@ img {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
 }
+
 img.smol {
   height: 150px;
   width: 150px;
 }
+
 img.prod {
   width: 175px;
   height: 175px;
@@ -114,22 +116,26 @@ h3 {
   letter-spacing: 1.55px;
   font-size: 1.2em;
 }
+
 h4 {
   letter-spacing: 1.55px;
   font-size: 0.75em;
   height: 100%;
   max-width: 250px;
 }
+
 h5 {
   letter-spacing: 1.55px;
   font-size: 1em;
   width: 80%;
 }
+
 p {
   font-size: 1em;
   text-align: center;
   width: 100%;
 }
+
 /*body-layout configuration*/
 .default-layout-body {
   display: grid;
@@ -156,10 +162,8 @@ p {
   grid-auto-flow: row;
   grid-template-rows: 0 auto 0px;
   align-items: space-between;
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.05)
-    ),
+  background: linear-gradient(rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)),
     url("../assets/bg/background.jpg");
   background-size: contain;
 }
@@ -171,7 +175,7 @@ p {
 /* layout of contents of the part's bodies*/
 .nav .nav-body {
   height: 100%;
-  margin:0px 20px;
+  margin: 0 20px;
   display: flex;
   justify-content: space-between;
   align-content: center;
@@ -203,6 +207,7 @@ p {
 #removeBtn:hover {
   background-color: red;
   color: white;
+  cursor: pointer;
 }
 
 #checkoutBtn {
@@ -241,17 +246,16 @@ p {
 .dialogue-box {
   justify-items: center;
   justify-content: space-evenly;
-
-  max-height: 100%;
-  width: 40vw;
+  min-height: 65vh;
+  max-height: 65vh;
+  margin: 20px 0;
+  width: 75vw;
   padding-top: 50px;
-  padding-left: 50px;
-  padding-right: 50px;
-  padding-bottom: 50px;
   background-color: rgb(6, 77, 6);
   border: 1px solid black;
   border-radius: 10px;
 }
+
 .dialogue-box-alt {
   justify-items: center;
   justify-content: space-evenly;
@@ -262,6 +266,7 @@ p {
   border: 1px solid black;
   border-radius: 10px;
 }
+
 .dialogue-box-alt-wide {
   justify-items: center;
   justify-content: space-evenly;
@@ -272,6 +277,7 @@ p {
   border: 1px solid black;
   border-radius: 10px;
 }
+
 .dialogue-box-plus {
   justify-items: center;
   justify-content: space-evenly;
@@ -302,6 +308,7 @@ input.text:focus {
   text-align: center;
   border: none;
 }
+
 select {
   color: white;
   font-family: "Century Gothic";
@@ -315,14 +322,17 @@ select {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
 }
+
 select option {
   color: white;
   background-color: black;
   border: none;
 }
+
 select.sizeField {
   border-bottom: 3px white solid;
 }
+
 select.sizeField option {
   color: black;
   background-color: white;
@@ -368,7 +378,6 @@ button.button:hover {
 }
 
 .product {
-  word-wrap: break-word;
   border: 1px solid black;
   border-radius: 20px;
   margin: 25px 0px;
@@ -376,6 +385,10 @@ button.button:hover {
   min-width: 255px;
   max-width: 255px;
   background-color: #000000ed;
+}
+
+#nameContainer {
+  max-width: 250px;
 }
 
 input[type="number"] {
@@ -398,12 +411,11 @@ input::-webkit-inner-spin-button {
 }
 
 /*Table layouts and designs*/
-/* #cart {
+#cart {
   border-radius: 10px;
   padding: 20px;
   margin: 20px 0 20px 0;
-  background-color: white;
-} */
+}
 
 #cartTable {
   margin: 0 auto;
@@ -420,4 +432,20 @@ input::-webkit-inner-spin-button {
 
 .tableValue {
   text-align: center;
+}
+
+#checkoutBtn {
+  background-color: green;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 20px;
+  text-decoration: none;
+  color: white;
+  transition-duration: 0.75s;
+}
+
+#checkoutBtn:hover {
+  background-color: white;
+  color: green;
+  cursor: pointer;
 }
