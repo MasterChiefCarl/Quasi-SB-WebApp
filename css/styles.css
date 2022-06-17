@@ -24,13 +24,18 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
 * {
   margin: 0;
   padding: 0;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  -webkit-user-select: none;
+  /* Safari */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE10+/Edge */
+  user-select: none;
+  /* Standard */
 }
 
 html,
@@ -46,6 +51,7 @@ body {
   width: 50%;
   font: normal 12px/2em "Century Gothic";
 }
+
 img {
   height: 200px;
   width: 200px;
@@ -85,6 +91,7 @@ h2,
 h3 {
   font-family: "starbucks";
 }
+
 h4,
 h5,
 h6 {
@@ -96,11 +103,13 @@ h1 {
   letter-spacing: 2px;
   margin-bottom: 50px;
 }
+
 h2 {
   letter-spacing: 1.25px;
   font-size: 2em;
   margin-bottom: 15px;
 }
+
 h3 {
   letter-spacing: 1.55px;
   font-size: 1.2em;
@@ -135,6 +144,7 @@ p{
 .default-layout-body .nav {
   position: sticky;
 }
+
 .default-layout-body .content {
   height: 100%;
   min-height: calc(100vh - 102px);
@@ -148,7 +158,6 @@ p{
   background-size: contain;
 }
 
-  
 .default-layout-body .footer {
   position: sticky;
 }
@@ -162,6 +171,7 @@ p{
   color: white;
   background-color: rgb(120, 59, 2);
 }
+
 .content .content-body {
   background-attachment: fixed;
   overflow: none;
@@ -172,6 +182,43 @@ p{
   justify-content: center;
   height: 100%;
 }
+
+#cart {
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0 20px 0;
+  background-color: white;
+}
+
+#cartTable {
+  margin: 0 auto;
+  border-spacing: .5em;
+}
+
+.tableLabel {
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  width: 100px;
+}
+
+.tableValue {
+  text-align: center;
+}
+
+#removeBtn {
+  background-color: white;
+  border-radius: 5px;
+  padding: 5px;
+  text-decoration: none;
+  color: red;
+}
+
+#removeBtn:hover {
+  background-color: red;
+  color: white;
+}
+
 .footer .footer-body {
   color: black;
   height: 100%;
@@ -241,6 +288,7 @@ input.text {
   border-bottom: 2px solid black;
   color: white;
 }
+
 input.text:focus {
   text-align: center;
   border: none;
@@ -274,6 +322,7 @@ button.button {
   border-radius: 25px;
   transition-duration: 0.5s;
 }
+
 button.button:hover {
   color: white;
   margin: 10px;
@@ -293,12 +342,14 @@ button.button:hover {
   white-space: nowrap;
   transition-duration: 1s;
 }
+
 .scrollmenu .scroll {
   display: inline-block;
   min-width: 350px;
   max-width: 100%;
   max-height: 100%;
 }
+
 .product {
   word-wrap: break-word;
   border: 1px solid black;
@@ -310,6 +361,20 @@ button.button:hover {
   background-color: #000000ed;
 }
 
+#qtyField {
+  height: 25px;
+  width: 35px;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#qtyField::-webkit-inner-spin-button,
+#qtyField::-webkit-outer-spin-button {
+
+  opacity: 1;
+
+}
 input[type="number"]{
   width:65px; height: 50px;
   border-radius: 10px;

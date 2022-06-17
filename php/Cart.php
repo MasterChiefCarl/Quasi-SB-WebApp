@@ -3,12 +3,14 @@
     require_once 'php/Session.php';
 
     use Sessions\Session;
-    Session::start();
+    if (session_status() === PHP_SESSION_NONE) {
+        Session::start();
+    }
     class Cart implements iCart {
-        private array $orderList;
-        private $totalAmount = 0;
+        private $totalBill = 0;
+        private $cartCollection = [];
 
-        public function addToCart($orders)
+        public function addToCart($orders, $ordQty, $itemSizeAdd)
         {           
 
             if ($orders['consID'] == '1') {
@@ -18,34 +20,40 @@
                 $orderedItem = new Food($orders['prodName'], $orders['subconsID'], (float)$orders['prodPrice']);
             }
 
-            if(Session::has('cart')) {;
+            if (Session::has('cart')) {
+            if(count(Session::get('cart')) == 0) {
+                echo 'true';
+                unset($_SESSION['cart']);
+                var_dump($_SESSION['cart']);
+            }
+            }
+
+            if(Session::has('cart')) {       
+                echo "HI";         
                 $tmpValue = $this->getCart();
                 $itemData = array('consName' => $orderedItem->getConsumableName(),
                 'consType' => $orderedItem->getConsType(),
-                'consPrice' => $orderedItem->getPrice()
+                'consPrice' => $orderedItem->getPrice(),
+                'consQty' => (int)$ordQty,
+                'consSizeAdd' => (float)$itemSizeAdd
                 );
                 array_push($tmpValue, $itemData);
-                Session::add('cart', $tmpValue);
-                // array_push($_SESSION['cart']['consName'], $orderedItem->getConsumableName());
-                // array_push($_SESSION['cart']['consType'], $orderedItem->getConsType());
-                // array_push($_SESSION['cart']['consPrice'], $orderedItem->getPrice());
+                Session::add('cart', $tmpValue);                
             }
-            else {
+            else {                
                 $orderedItems[0] = array('consName' => $orderedItem->getConsumableName(),
                 'consType' => $orderedItem->getConsType(),
-                'consPrice' => $orderedItem->getPrice()
-                );
-
-                // $_SESSION['cart']['consName'] = $orderedItem->getConsumableName();
-                // $_SESSION['cart']['consType'] = $orderedItem->getConsType();
-                // $_SESSION['cart']['consPrice'] = $orderedItem->getPrice();
+                'consPrice' => $orderedItem->getPrice(),
+                'consQty' => (int)$ordQty,
+                'consSizeAdd' => (float)$itemSizeAdd
+                );    
                 Session::add('cart', $orderedItems);             
-            }
+            }           
         }
 
         public function removeFromCart($item)
         {
-            Session::remove('cart', $item);
+            Session::remove('cart', $item);            
         }
 
         public function getCart() : array
@@ -60,6 +68,13 @@
 
         public function calculateBill()
         {
-            
+            if (Session::has('cart')) {
+                $this->cartCollection = $this->getCart();
+
+                foreach($this->cartCollection as $collectionCol) {
+                    $this->totalBill += ($collectionCol['consPrice'] + $collectionCol['consSizeAdd']) * $collectionCol['consQty'];
+                }
+            }
+            return '₱ '.$this->totalBill.'.00';
         }
     }

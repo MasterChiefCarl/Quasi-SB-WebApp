@@ -5,7 +5,6 @@ require_once 'php/init.php';
 require_once 'php/Session.php';
 
 use Sessions\Session;
-
 $customer = new Customer();
 
 if (!$_REQUEST && session_id() != '') {
