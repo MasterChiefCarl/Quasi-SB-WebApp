@@ -3,7 +3,7 @@
     require_once 'php/Session.php';
 
     use Sessions\Session;
-    if (session_status() === PHP_SESSION_NONE) {
+    if (!isset($_SESSION['cart'])) {
         Session::start();
     }
     class Cart implements iCart {
@@ -20,16 +20,7 @@
                 $orderedItem = new Food($orders['prodName'], $orders['subconsID'], (float)$orders['prodPrice']);
             }
 
-            if (Session::has('cart')) {
-            if(count(Session::get('cart')) == 0) {
-                echo 'true';
-                unset($_SESSION['cart']);
-                var_dump($_SESSION['cart']);
-            }
-            }
-
-            if(Session::has('cart')) {       
-                echo "HI";         
+            if(Session::has('cart')) {                         
                 $tmpValue = $this->getCart();
                 $itemData = array('consName' => $orderedItem->getConsumableName(),
                 'consType' => $orderedItem->getConsType(),
@@ -53,7 +44,8 @@
 
         public function removeFromCart($item)
         {
-            Session::remove('cart', $item);            
+            Session::remove('cart', $item);
+            array_values(Session::get('cart'));
         }
 
         public function getCart() : array

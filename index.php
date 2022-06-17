@@ -12,17 +12,26 @@ if (!$_REQUEST && session_id() != '') {
   //last session destroyer!
 }
 
-
 if (session_status() === PHP_SESSION_NONE) {
   Session::start();
 }
 
 if ($_REQUEST && $_REQUEST["custName"] != null) {
-  $customer->setCustName($_POST['custName']);
+  if ($_GET) {
+    if(isset($_GET['return'])) {
+      if($_GET['return'] == true) {
+        Session::stop();
+      }
+      Session::start();
+    }
+  }
+  if ($_REQUEST) {
+    if(isset($_REQUEST['custName']))
+      $customer->setCustName($_POST['custName']);
 
-  // Session::add('custName', $_REQUEST["custName"]);
-  if (Session::has('custName')) {
-    header("location:select.php");
+    if (Session::has('custName')) {
+      header("location:select.php");
+    }
   }
 }
 ?>
@@ -46,7 +55,9 @@ if ($_REQUEST && $_REQUEST["custName"] != null) {
 <body>
   <div class="default-layout-body">
     <div class="nav">
-      <div class="nav-body"><h3>Welcome To Starbucks</h3></div>
+      <div class="nav-body">
+        <h3>Welcome To Starbucks</h3>
+      </div>
     </div>
     <div class="content">
       <div class="content-body">
