@@ -169,7 +169,7 @@ function showProducts(response) {
       return function () {
         if (qtyField.value >= 1)
           getProdData(data, qtyField.value, sizeField.value);
-        window.alert('Product' + data.prodName +' has been added to Cart. Please check below of page for your Cart List.');
+        window.alert('Product ' + data.prodName +' has been added to Cart. Please check below of page for your Cart List.');
         window.location.href = 'select.php';
       };
 

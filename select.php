@@ -14,11 +14,19 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if ($_GET) {
-  $cart->removeFromCart($_GET['entry']);
-  echo ("<script LANGUAGE='JavaScript'>
+  if (isset($_GET['entry'])) {
+    $cart->removeFromCart($_GET['entry']);
+    echo ("<script LANGUAGE='JavaScript'>
   window.alert('Entry has been removed. Succesfully Updated!');
   window.location.href='select.php';
   </script>");
+  }
+  if (isset($_GET['checkout'])) {
+    echo ("<script LANGUAGE='JavaScript'>
+  window.alert('You have selected checkout. Please Wait...');
+  window.location.href='select.php';
+  </script>");
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -117,6 +125,11 @@ if ($_GET) {
               echo '<tr>';
               echo '<td colspan="6" align="right" style="border-top: 2px solid white;">' . 'Total Bill' . '</td>';
               echo '<td class="tableValue" style="border-top: 2px solid white;">' . $cart->calculateBill() . '</td>';
+              echo '</tr>';
+
+              echo '<tr>';
+              echo '<td colspan="6"></td>';
+              echo '<td>' . '<a href="select.php?checkout=true"id="checkoutBtn">' . 'Checkout' . '</a></td>';
               echo '</tr>';
 
               ?>
