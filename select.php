@@ -24,7 +24,7 @@ if ($_GET) {
   if (isset($_GET['checkout'])) {
     echo ("<script LANGUAGE='JavaScript'>
   window.alert('You have selected checkout. Please Wait...');
-  window.location.href='select.php';
+  window.location.href='checkout.php';
   </script>");
   }
 }
