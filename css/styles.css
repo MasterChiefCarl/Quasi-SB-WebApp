@@ -273,10 +273,10 @@ p {
 .dialogue-box-plus {
   justify-items: center;
   justify-content: space-evenly;
-  min-height: 65vh;
-  max-height: 65vh;
-  margin: 20px 0px;
-  width: 75vw;padding-top:50px;
+  min-height: 65.5vh;
+  max-height: 65.5vh;
+  margin: 20px;
+  width: 85vw;padding:50px 10px;
   background-color: rgba(6, 77, 6, 0.8);
   border: 1px solid black;
   border-radius: 10px;
@@ -350,8 +350,8 @@ button.button:hover {
 .scrollmenu {
   max-height: 100%;
   max-width: 100%;
-  margin: 5px;
-  padding: 4px;
+  margin: 20px;
+  padding: 10px;
   overflow-x: auto;
   white-space: nowrap;
   transition-duration: 1s;
