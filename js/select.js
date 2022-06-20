@@ -416,13 +416,10 @@ function showReceipt(data) {
   modalContent.id = 'modalContent';
   modalContent.className = 'modalContent';
 
-  var close = document.createElement('button');
-  close.className = 'close';
-  close.id = 'close';
-  close.innerHTML = '&times';
-
-  modal.appendChild(close);
   modal.appendChild(modalContent);
+  var close = document.createElement('button');
+  close.id = 'close';
+  close.innerHTML = 'EXIT';
 
   var count = 1;
   var totalBill = 0;
@@ -478,22 +475,28 @@ function showReceipt(data) {
       <p>Total Bill: ${totalBill}</p>
   `;
 
+
   modalContent.innerHTML = html;
+  modalContent.append(close);
   console.log(modal);
 
 
   modal.style.display = "block";
 
-
   close.onclick = function () {
-    modal.style.display = "none";
+    axios.get("index.php", {
+      params: {
+        end: true
+      }
+    });
+    window.location = 'index.php';
   }
 
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  }
+  // window.onclick = function (event) {
+  //   if (event.target == modal) {
+  //     modal.style.display = "none";
+  //   }
+  // }
 
   document.body.append(modal);
 

@@ -33,6 +33,10 @@ if ($_REQUEST) {
       header("location:select.php");
     }
   }
+
+  if (isset($_GET['end'])) {
+    Session::stop();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
