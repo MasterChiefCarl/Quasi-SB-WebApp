@@ -181,6 +181,8 @@ class DBLibrary implements IDBFuncs
 
         $result = $this->_executeQuery();
 
+        $this->sql = '';
+
         return $result;
     }
 

@@ -178,20 +178,6 @@ function showProducts(response) {
   document.getElementById("result-field").appendChild(rawdata);
 }
 
-function addOrder(response, ordQty) {
-  var result = response;
-
-  axios
-    .post("dbquery.php", {
-      items: result.data,
-      ordQty: ordQty,
-    })
-    .then(response)
-    .catch((error) => {
-      console.error(error);
-    });
-}
-
 function createSizeField(consID, sizeField) {
 
   axios.get('dbquery.php', {
@@ -216,17 +202,6 @@ function createSizeField(consID, sizeField) {
 }
 
 function getProdData(data, ordQty, itemSizeAdd) {
-  var id = data.prodID;
-  axios
-    .get("dbquery.php", {
-      params: {
-        itemID: id
-      },
-    })
-    .then((response) => addOrder(response, ordQty))
-    .catch((error) => {
-      console.error(error);
-    });
 
   axios.post('api.php',
     {
@@ -328,18 +303,61 @@ function showItemsInCart(itemsInCart, cartTotalBill) {
               </tr>
               <tr>
                   <td colspan="7" align="center">
-                      <button id="checkoutBtn" onclick="">Place Order</button>
+                      <button id="checkoutBtn">Check Out</button>
                   </td>
               </tr>
               </table>
               </div>
               `;
+
   }
   else {
     var cartTable = '';
   }
 
   document.getElementById('cartContainer').innerHTML = cartTable;
+  document.getElementById('checkoutBtn').onclick = (function (data) {
+    return function () {
+      addOrder(data);
+    }
+  })(res.data);
+}
+
+function addOrder(data) {
+
+  axios.get("dbquery.php", {
+    params: {
+      transaction: true
+    }
+  }).then((transaction) => {
+    console.log('-----------------');
+    axios.get("dbquery.php", {
+      params: {
+        itemID: true
+      }
+    })
+      .then((item) => {
+        console.log(item.data);
+        axios
+          .post("dbquery.php", {
+            itemNo: item.data,
+            transID: transaction.data,
+            itemData: data
+          })
+          .then((response) => {
+            console.log(response.data);
+            getTransID();
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  )
 }
 
 function removeFromCart(itemCartID, consName) {
@@ -357,4 +375,122 @@ function removeFromCart(itemCartID, consName) {
     .catch(error => {
       console.error(error);
     })
+}
+
+function getTransID() {
+  axios
+    .get("dbquery.php", {
+      params: {
+        transID: true,
+      },
+    })
+    .then((response) => {getOrders(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function getOrders(transID) {
+  axios.get("dbquery.php", {
+    params: {
+      transData: transID,
+    }
+  })
+    .then((response) => {
+      console.log(response.data);
+      showReceipt(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function showReceipt(data) {
+  var modal = document.createElement('div');
+  modal.id = 'myModal';
+  modal.className = 'myModal';
+
+  var modalContent = document.createElement('div');
+  modalContent.id = 'modalContent';
+  modalContent.className = 'modalContent';
+
+  var close = document.createElement('button');
+  close.className = 'close';
+  close.id = 'close';
+  close.innerHTML = '&times';
+
+  modal.appendChild(close);
+  modal.appendChild(modalContent);
+
+  var count = 1;
+  var totalBill = 0;
+  // var modal = document.getElementById("myModal");
+  var btn = document.getElementById("checkoutBtn");
+  // var close = document.getElementById("close");
+  // console.log(data);
+  var html = `  
+      <p>Customer's Name: ${data[0].custName}</p>
+      <table class="receipt">
+      <tr>
+        <td>Item #</td>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Subtotal</td>
+      </tr>
+    `;
+
+    for (i in data) {
+      html += `
+      <tr>
+        <td class="">
+          ${count}
+        </td>
+        <td>
+          ${data[i].itemName}
+        </td>
+        <td>
+          ${data[i].itemPrice}
+        </td>
+        <td>
+          ${data[i].itemQty}
+        </td>
+        <td>
+          ${data[i].itemTotal}
+        </td>
+      </tr>
+      `;
+    count++;
+    totalBill+=parseInt(data[i].itemTotal);
+    }
+
+  html+= `
+    
+      </table>
+      <hr>
+      <hr>
+      <p>Total Bill: ${totalBill}</p>
+  `;
+  
+  modalContent.innerHTML = html;
+  console.log (modal);
+
+  
+    modal.style.display = "block";
+  
+  
+  close.onclick = function() {
+    modal.style.display = "none";
+  } 
+  
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+  document.body.append(modal);
+  
+  // $('#myModal').modal('show');
 }

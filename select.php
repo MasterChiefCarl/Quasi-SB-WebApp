@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Welcome To Starbucks <?php echo $customer->getCustName().' '; ?>:QSASI-STARBUCKS POS</title>
+  <title>Welcome To Starbucks <?php echo $customer->getCustName() . ' '; ?>:QSASI-STARBUCKS POS</title>
 
   <!-- Stylesheets, Logo ref and, jsScripts -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -59,9 +59,14 @@ if (session_status() === PHP_SESSION_NONE) {
           </center>
         </div>
         <div id="cartContainer"></div>
+        <!-- <div id="myModal" class="modal">
+          <div class="modal-content" id="modalContent">
+            <span class="close">&times;</span>
+          </div>
+        </div> -->
       </div>
     </div>
-    
+
     <div class="footer">
       <div class="footer-body">
         <h3>Made with 💖 by Group 1 Jungco, Lapiz, Garces</h3>
