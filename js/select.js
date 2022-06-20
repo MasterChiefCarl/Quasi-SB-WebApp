@@ -258,8 +258,8 @@ function showItemsInCart(itemsInCart, cartTotalBill) {
               <tr>
                   <td class="tableLabel">Item Type</td>
                   <td class="tableLabel">Item Name</td>
-                  <td class="tableLabel">Price</td>
                   <td class="tableLabel">Qty</td>
+                  <td class="tableLabel">Price</td>
                   <td class="tableLabel">Size Additional</td>
                   <td class="tableLabel">Total</td>
               </tr>            
@@ -286,9 +286,9 @@ function showItemsInCart(itemsInCart, cartTotalBill) {
               <tr>
                   <td class="tableValue">${subConsName}</td>
                   <td class="tableValue">${res.data[i].consName}</td>
-                  <td class="tableValue">₱ ${res.data[i].consPrice}</td>
                   <td class="tableValue">${res.data[i].consQty}</td>
-                  <td class="tableValue">${res.data[i].consSizeAdd}</td>
+                  <td class="tableValue">₱ ${res.data[i].consPrice}</td>
+                  <td class="tableValue">+ ₱ ${res.data[i].consSizeAdd}.00 each</td>
                   <td class="tableValue">₱ ${(res.data[i].consPrice + res.data[i].consSizeAdd) * res.data[i].consQty}.00</td>
                   <td class="tableValue">
                       <button id="removeBtn" onclick="removeFromCart('${i}', '${res.data[i].consName}')">Remove</button>
@@ -384,7 +384,8 @@ function getTransID() {
         transID: true,
       },
     })
-    .then((response) => {getOrders(response.data);
+    .then((response) => {
+      getOrders(response.data);
     })
     .catch((error) => {
       console.error(error);
@@ -441,8 +442,8 @@ function showReceipt(data) {
       </tr>
     `;
 
-    for (i in data) {
-      html += `
+  for (i in data) {
+    html += `
       <tr>
         <td class="">
           ${count}
@@ -462,35 +463,35 @@ function showReceipt(data) {
       </tr>
       `;
     count++;
-    totalBill+=parseInt(data[i].itemTotal);
-    }
+    totalBill += parseInt(data[i].itemTotal);
+  }
 
-  html+= `
+  html += `
     
       </table>
       <hr>
       <hr>
       <p>Total Bill: ${totalBill}</p>
   `;
-  
-  modalContent.innerHTML = html;
-  console.log (modal);
 
-  
-    modal.style.display = "block";
-  
-  
-  close.onclick = function() {
+  modalContent.innerHTML = html;
+  console.log(modal);
+
+
+  modal.style.display = "block";
+
+
+  close.onclick = function () {
     modal.style.display = "none";
-  } 
-  
-  window.onclick = function(event) {
+  }
+
+  window.onclick = function (event) {
     if (event.target == modal) {
       modal.style.display = "none";
     }
   }
 
   document.body.append(modal);
-  
+
   // $('#myModal').modal('show');
 }
