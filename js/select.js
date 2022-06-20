@@ -411,7 +411,6 @@ function showReceipt(data) {
   var modal = document.createElement('div');
   modal.id = 'myModal';
   modal.className = 'myModal';
-
   var modalContent = document.createElement('div');
   modalContent.id = 'modalContent';
   modalContent.className = 'modalContent';
@@ -473,7 +472,8 @@ function showReceipt(data) {
       </table>
       <hr>
       <hr>
-      <h3 style="color:black; filter:none;">Total Bill: ${totalBill}</h3>
+      <h2 style="color:black; filter:none;">Total Bill: ${totalBill}</h2>
+      <h
   `;
 
 
@@ -499,6 +499,3 @@ function showReceipt(data) {
   // $('#myModal').modal('show');
 }
 
-function getRndInteger(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
