@@ -430,8 +430,12 @@ function showReceipt(data) {
   var btn = document.getElementById("checkoutBtn");
   // var close = document.getElementById("close");
   // console.log(data);
-  var html = `  
-      <p>Customer's Name: ${data[0].custName}</p>
+  var html = `
+  <center>  
+      <img class="smoller" src="assets/logo/starbucks.png">
+      <h2 style="color:black; margin-bottom:0;  filter: none;">Starbucks Inc.</h2>
+      <h3 style="color:black;  filter: none;">Customer's Name: ${data[0].custName}</h3>
+      </center>
       <table class="receipt">
       <tr>
         <td>Item #</td>

@@ -41,7 +41,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
     <div class="content">
       <div class="content-body">
-        <div class="dialogue-box" id="fadeInDowwn">
+        <div class="dialogue-box-alt" id="fadeInDowwn">
           <center>
             <h2>Select Your Menu Options:</h2>
             <select name="consumables" id="consumables">
@@ -58,6 +58,7 @@ if (session_status() === PHP_SESSION_NONE) {
             <div id="result-field"></div>
           </center>
         </div>
+        <br><br>
         <div id="cartContainer"></div>
         <!-- <div id="myModal" class="modal">
           <div class="modal-content" id="modalContent">
