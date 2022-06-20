@@ -34,9 +34,7 @@ if ($_REQUEST) {
     }
   }
 
-  if (isset($_GET['end'])) {
-    Session::stop();
-  }
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">

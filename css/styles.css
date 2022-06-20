@@ -166,8 +166,10 @@ p {
   grid-auto-flow: row;
   grid-template-rows: 0 auto 0px;
   align-items: space-between;
-  background: linear-gradient(rgba(255, 255, 255, 0.05),
-      rgba(255, 255, 255, 0.05)),
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.05),
+      rgba(255, 255, 255, 0.05)
+    ),
     url("../assets/bg/background.jpg");
   background-size: contain;
 }
@@ -191,6 +193,7 @@ p {
   background-attachment: fixed;
   overflow: none;
   padding: 20px;
+  min-height: 120vh;
   display: grid;
   place-items: initial;
   justify-items: center;
@@ -250,25 +253,28 @@ p {
 .dialogue-box {
   justify-items: center;
   justify-content: space-evenly;
-  min-height: 65vh;
-  max-height: 65vh;
-  margin: 15px 0 0 0;
+  max-height: 55vh;
+  margin: 15px 0px;
   width: 40vw;
-  padding-top: 50px;
+  padding: 50px 0px;
   background-color: rgb(6, 77, 6);
   border: 1px solid black;
   border-radius: 10px;
 }
 
 .dialogue-box-alt {
+  display: flex;
   justify-items: center;
-  justify-content: space-evenly;
   max-height: 100%;
   width: 35vw;
-  padding: 25px;
+  padding: 25px 10px;
   background-color: rgba(6, 77, 6, 0.7);
   border: 1px solid black;
   border-radius: 10px;
+  align-content: stretch;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .dialogue-box-alt-wide {
@@ -284,14 +290,18 @@ p {
 
 .dialogue-box-plus {
   justify-items: center;
-  justify-content: space-evenly;
-  min-height: 60.5vh;
-  max-height: 60.5vh;
+  justify-content: center;
+  min-height: 60vh;
+  max-height: 60vh;
   width: 85vw;
-  padding: 50px 10px;
+  padding: 50px 25px;
   background-color: rgba(6, 77, 6, 0.8);
   border: 1px solid black;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: stretch;
 }
 
 /*Input configuations*/
@@ -326,19 +336,13 @@ select {
   animation-name: fadeInDown;
 }
 
-select option {
-  color: white;
-  background-color: black;
-  border: none;
-}
-
 select.sizeField {
   border-bottom: 3px white solid;
 }
 
-select.sizeField option {
-  color: black;
-  background-color: white;
+select option {
+  color: white;
+  background-color: black;
   border: none;
 }
 
@@ -455,7 +459,9 @@ input::-webkit-inner-spin-button {
 
 /* The Modal (background) */
 .myModal {
-  display: none; /* Hidden by default */
+  display: flex; /* Hidden by default */
+  justify-content: center;
+  align-items: center;
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
   left: 0;
@@ -463,41 +469,54 @@ input::-webkit-inner-spin-button {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.518); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
 .modalContent {
+  display: flex; /* Hidden by default */
   background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
+  /* margin: 15% auto; /*15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  border-bottom: 0px;
+  width: 80vw;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 /* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+.button#close {
+  background-color: green;
+  color: white;
   font-weight: bold;
+  transition-duration: 1s;
+  width: 10%;
 }
 
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
+.button#close:hover {
+  color: green;
+  background-color: white;
   cursor: pointer;
 }
 
 .receipt {
-  width: 80%;
+  border-radius: 10px;
+  width: 50%;
+  border: 1px solid #888;
+  border-bottom: 0px;
+}
+.receipt th {
+  border-bottom: 2px solid black;
 }
 
-.receipt > tr > td {
-  width: 20%;
-  height: 80px;
-  font-size: larger;
-  font-weight: bold;
+.receipt  tr  td {
+  display: table-cell;
+  width: 10%;
+  align-items: center;
+  justify-content: center;
 }

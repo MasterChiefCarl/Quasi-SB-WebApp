@@ -418,7 +418,8 @@ function showReceipt(data) {
 
   modal.appendChild(modalContent);
   var close = document.createElement('button');
-  close.id = 'close';
+  close.className = 'button';
+  close.id = "close";
   close.innerHTML = 'EXIT';
 
   var count = 1;
@@ -433,7 +434,7 @@ function showReceipt(data) {
       <h2 style="color:black; margin-bottom:0;  filter: none;">Starbucks Inc.</h2>
       <h3 style="color:black;  filter: none;">Customer's Name: ${data[0].custName}</h3>
       </center>
-      <table class="receipt">
+      <table class="receipt" align="center">
       <tr>
         <td>Item #</td>
         <td>Name</td>
@@ -472,7 +473,7 @@ function showReceipt(data) {
       </table>
       <hr>
       <hr>
-      <p>Total Bill: ${totalBill}</p>
+      <h3 style="color:black; filter:none;">Total Bill: ${totalBill}</h3>
   `;
 
 
@@ -481,24 +482,23 @@ function showReceipt(data) {
   console.log(modal);
 
 
-  modal.style.display = "block";
 
   close.onclick = function () {
     axios.get("index.php", {
       params: {
-        end: true
+        return: true
       }
     });
     window.location = 'index.php';
   }
 
-  // window.onclick = function (event) {
-  //   if (event.target == modal) {
-  //     modal.style.display = "none";
-  //   }
-  // }
+
 
   document.body.append(modal);
 
   // $('#myModal').modal('show');
+}
+
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
