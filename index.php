@@ -54,8 +54,10 @@ if ($_REQUEST) {
 <body>
   <div class="default-layout-body">
     <div class="nav">
-      <div class="nav-body">
+      <div class="nav-body" style="justify-content:space-around">
+        <center>
         <h3>Welcome To Starbucks</h3>
+        </center>
       </div>
     </div>
     <div class="content">
