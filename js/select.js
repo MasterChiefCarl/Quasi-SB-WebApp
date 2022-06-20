@@ -484,12 +484,9 @@ function showReceipt(data) {
 
 
   close.onclick = function () {
-    axios.get("index.php", {
-      params: {
-        return: true
-      }
-    });
-    window.location = 'index.php';
+    window.alert('Order has been sent. Please proceed to cashier to pay ordered drinks. Returning To Home.');
+    window.location.href='index.php?return=true';
+
   }
 
 
