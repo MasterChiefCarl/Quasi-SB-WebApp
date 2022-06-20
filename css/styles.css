@@ -187,10 +187,10 @@ p {
   height: 100%;
   margin: 0 20px;
   display: flex;
-  justify-content: space-between;
   align-content: center;
   color: white;
   align-items: center;
+  justify-content: space-around;
 }
 
 .content .content-body {

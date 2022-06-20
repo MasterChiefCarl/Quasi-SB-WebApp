@@ -55,7 +55,9 @@ if ($_REQUEST) {
   <div class="default-layout-body">
     <div class="nav">
       <div class="nav-body">
+        <center>
         <h3>Welcome To Starbucks</h3>
+        </center>
       </div>
     </div>
     <div class="content">
