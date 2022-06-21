@@ -479,8 +479,8 @@ input::-webkit-inner-spin-button {
   background-color: #fefefe;
   /* margin: 15% auto; /*15% from the top and centered */
   padding: 20px;
+  border-radius: 10px;
   border: 1px solid #888;
-  border-bottom: 0px;
   width: 80vw;
   flex-direction: column;
   flex-wrap: nowrap;
