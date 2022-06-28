@@ -1,7 +1,6 @@
 drop database if exists sb;
 create database sb;
 
-
 drop table if exists sb.consumables;
 create table sb.consumables (
 consID char (5) primary key,
@@ -34,6 +33,7 @@ sizeID char (5) primary key,
 sizeName varchar (10) not null,
 sizeAddPrice integer (5) not null
 );
+
 insert into sb.beverageSizes values ('1', 'Tall', 0);
 insert into sb.beverageSizes values ('2', 'Grande', 15);
 insert into sb.beverageSizes values ('3', 'Venti', 30);
@@ -100,9 +100,9 @@ custName varchar (50),
 transactionStatus varchar (10)
 );
 
-select * from sb.transactions;					
-select * from sb.products;
 select * from sb.consumables;
-select * from sb.subconsumables;
+select * from sb.subconsumables;		
+select * from sb.beverageSizes;
+select * from sb.products;
 select * from sb.transactions;					
 
