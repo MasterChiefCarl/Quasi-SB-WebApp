@@ -323,6 +323,38 @@ function showItemsInCart(itemsInCart, cartTotalBill) {
   })(res.data);
 }
 
+function removeFromCart(itemCartID, consName) {
+  console.log(itemCartID);
+
+  axios.post('api.php',
+    {
+      itemCartID: itemCartID
+    })
+    .then((response) => {
+      const { data } = response;
+      window.alert(consName + ' has been successfully removed from your cart.');
+      getItemsInCart();
+    })
+    .catch(error => {
+      console.error(error);
+    })
+}
+
+function getTransID() {
+  axios
+    .get("dbquery.php", {
+      params: {
+        transID: true,
+      },
+    })
+    .then((response) => {
+      getOrders(response.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function addOrder(data) {
 
   axios.get("dbquery.php", {
@@ -358,38 +390,6 @@ function addOrder(data) {
       });
   }
   )
-}
-
-function removeFromCart(itemCartID, consName) {
-  console.log(itemCartID);
-
-  axios.post('api.php',
-    {
-      itemCartID: itemCartID
-    })
-    .then((response) => {
-      const { data } = response;
-      window.alert(consName + ' has been successfully removed from your cart.');
-      getItemsInCart();
-    })
-    .catch(error => {
-      console.error(error);
-    })
-}
-
-function getTransID() {
-  axios
-    .get("dbquery.php", {
-      params: {
-        transID: true,
-      },
-    })
-    .then((response) => {
-      getOrders(response.data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
 }
 
 function getOrders(transID) {
